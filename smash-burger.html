@@ -1,0 +1,1975 @@
+<!--
+  ════════════════════════════════════════════════════
+  SMASH – Fast Casual Restaurant Website Template
+  ════════════════════════════════════════════════════
+  Designed & Built by : Vinayak Ganiger
+  Co-created with     : Claude (Anthropic AI)
+  ────────────────────────────────────────────────────
+  📧 Email     : vinayakganiger445@gmail.com
+  💬 WhatsApp  : https://wa.me/4916364141​97
+  ────────────────────────────────────────────────────
+  Like this template? Need a custom website for your
+  restaurant? Get in touch — we build beautiful,
+  professional restaurant websites fast.
+  ════════════════════════════════════════════════════
+-->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMASH – Burger & Street Food Hannover</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── VARIABLES ─────────────────────────────────────────── */
+    :root {
+      --cream:   #F8F4EE;
+      --red:     #E63329;
+      --red-dark:#B8201A;
+      --yellow:  #F5C518;
+      --black:   #1A1A1A;
+      --gray:    #4A4A4A;
+      --light:   #EDEBE6;
+
+      --bg:      var(--cream);
+      --text:    var(--black);
+      --surface: #FFFFFF;
+      --border:  #E0DBD3;
+
+      --font-head: 'Barlow Condensed', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+
+      --radius: 4px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.10);
+      --transition: 0.3s ease;
+    }
+
+    body.dark-mode {
+      --bg:      #111111;
+      --text:    #F0ECE4;
+      --surface: #1E1E1E;
+      --border:  #333333;
+      --light:   #222222;
+      --cream:   #111111;
+    }
+
+    /* ─── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
+    }
+    img { max-width:100%; display:block; }
+    a { text-decoration:none; color:inherit; }
+    ul { list-style:none; }
+    button { cursor:pointer; border:none; background:none; font-family:inherit; }
+
+    /* ─── LOADER ─────────────────────────────────────────────── */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--black);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 20px;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+
+    .loader-burger {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      animation: bounceIn 0.6s ease forwards;
+    }
+    .bun-top, .bun-bot {
+      width: 64px; height: 18px; border-radius: 50%;
+      background: var(--yellow);
+      animation: squash 1s ease-in-out infinite alternate;
+    }
+    .patty {
+      width: 70px; height: 14px; border-radius: 3px;
+      background: var(--red);
+    }
+    .cheese {
+      width: 74px; height: 6px; border-radius: 2px;
+      background: #F5A623;
+    }
+    .lettuce {
+      width: 76px; height: 8px; border-radius: 50%;
+      background: #5C8E3E;
+    }
+    @keyframes squash {
+      from { transform: scaleY(1); }
+      to   { transform: scaleY(0.8); }
+    }
+    @keyframes bounceIn {
+      from { transform: translateY(-30px); opacity:0; }
+      to   { transform: translateY(0); opacity:1; }
+    }
+
+    .loader-text {
+      font-family: var(--font-head);
+      font-size: 3rem; font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: 6px;
+      animation: pulse 1s ease-in-out infinite alternate;
+    }
+    .loader-text span { color: var(--red); }
+    @keyframes pulse {
+      from { opacity:0.7; }
+      to   { opacity:1; }
+    }
+
+    /* ─── NAVBAR ─────────────────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 2rem;
+      height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+    #navbar.scrolled {
+      background: var(--bg);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 2rem; font-weight: 900;
+      letter-spacing: 3px;
+      color: var(--red);
+    }
+    .nav-logo span { color: var(--yellow); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+    }
+    .nav-links a {
+      font-family: var(--font-head);
+      font-size: 1.1rem; font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform var(--transition);
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-right {
+      display: flex; align-items: center; gap: 1rem;
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex; align-items: center; gap: 0;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .lang-btn {
+      padding: 5px 10px;
+      font-family: var(--font-head);
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--gray);
+      background: transparent;
+      transition: all var(--transition);
+      border-right: 1px solid var(--border);
+    }
+    .lang-btn:last-child { border-right: none; }
+    .lang-btn.active {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-btn:hover:not(.active) {
+      background: var(--light);
+      color: var(--red);
+    }
+
+    /* Dark mode toggle */
+    .dark-toggle {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .dark-toggle:hover { background: var(--border); transform: scale(1.1); }
+
+    /* Order CTA in nav */
+    .nav-order-btn {
+      padding: 9px 20px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: 1rem; font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: background var(--transition), transform var(--transition);
+    }
+    .nav-order-btn:hover { background: var(--red-dark); transform: scale(1.03); }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      width: 30px; cursor: pointer;
+    }
+    .nav-hamburger span {
+      display: block; height: 3px; background: var(--text);
+      border-radius: 2px; transition: all var(--transition);
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed; top: 70px; left: 0; right: 0; z-index: 999;
+      background: var(--bg);
+      padding: 1.5rem 2rem;
+      flex-direction: column; gap: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border-top: 3px solid var(--red);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: var(--font-head);
+      font-size: 1.4rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color var(--transition);
+    }
+    .mobile-nav a:hover { color: var(--red); }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: var(--black);
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(230,51,41,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(245,197,24,0.15) 0%, transparent 50%);
+    }
+
+    /* Diagonal stripe pattern */
+    .hero-stripes {
+      position: absolute; inset: 0; opacity: 0.04;
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffffff 0px, #ffffff 2px,
+        transparent 2px, transparent 24px
+      );
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 2rem;
+      padding-top: 100px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 4rem;
+    }
+
+    .hero-text { }
+    .hero-badge {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: 0.85rem; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+      animation: slideInLeft 0.8s ease 0.3s both;
+    }
+    .hero-h1 {
+      font-family: var(--font-head);
+      font-size: clamp(4rem, 9vw, 8rem);
+      font-weight: 900;
+      line-height: 0.9;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      margin-bottom: 1rem;
+      animation: slideInLeft 0.8s ease 0.5s both;
+    }
+    .hero-h1 .accent { color: var(--red); }
+    .hero-h1 .accent-y { color: var(--yellow); }
+
+    .hero-sub {
+      font-size: 1.1rem; color: rgba(255,255,255,0.7);
+      line-height: 1.7; max-width: 420px;
+      margin-bottom: 2rem;
+      animation: slideInLeft 0.8s ease 0.7s both;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: slideInLeft 0.8s ease 0.9s both;
+    }
+    .btn-primary {
+      padding: 16px 36px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: 1.15rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: all var(--transition);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,51,41,0.4); }
+
+    .btn-outline {
+      padding: 16px 36px;
+      border: 2px solid rgba(255,255,255,0.4);
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: 1.15rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: all var(--transition);
+    }
+    .btn-outline:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    .hero-visual {
+      display: flex; align-items: center; justify-content: center;
+      animation: slideInRight 0.8s ease 0.6s both;
+    }
+    .hero-plate {
+      width: 360px; height: 360px;
+      background: radial-gradient(circle at 40% 40%, #3a3a3a, #1a1a1a);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 2px 0 rgba(255,255,255,0.05);
+    }
+    .hero-plate::before {
+      content: '';
+      position: absolute; inset: -8px;
+      border-radius: 50%;
+      border: 2px dashed rgba(245,197,24,0.3);
+      animation: spin 20s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .big-burger-icon {
+      font-size: 9rem;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 10px 30px rgba(230,51,41,0.3));
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Hero scroll indicator */
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-family: var(--font-head);
+      font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+      animation: fadeIn 1s ease 1.5s both;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity:0.3; }
+      50% { opacity:1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-40px); opacity:0; }
+      to   { transform: translateX(0); opacity:1; }
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(40px); opacity:0; }
+      to   { transform: translateX(0); opacity:1; }
+    }
+    @keyframes fadeIn {
+      from { opacity:0; }
+      to   { opacity:1; }
+    }
+
+    /* ─── STATS STRIP ────────────────────────────────────────── */
+    #stats {
+      background: var(--red);
+      padding: 1.5rem 2rem;
+    }
+    .stats-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .stat-item {
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.25);
+      padding: 0.5rem 1rem;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 2.5rem; font-weight: 900;
+      color: #fff; letter-spacing: 1px;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.8rem; font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+
+    /* ─── SECTION COMMONS ────────────────────────────────────── */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-tag {
+      font-family: var(--font-head);
+      font-size: 0.85rem; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--gray);
+      line-height: 1.7; max-width: 560px;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity:1; transform: translateY(0); }
+
+    /* ─── ABOUT / STORY ──────────────────────────────────────── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-box {
+      background: var(--light);
+      border-radius: var(--radius);
+      height: 480px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--red), var(--yellow));
+    }
+    .about-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      width: 120px; height: 120px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #fff;
+      font-family: var(--font-head);
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(230,51,41,0.4);
+    }
+    .about-badge .big { font-size: 2rem; font-weight: 900; line-height: 1; }
+    .about-badge .small { font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+    .about-content { }
+    .about-features {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.2rem; margin-top: 2rem;
+    }
+    .about-feature {
+      display: flex; gap: 0.8rem; align-items: flex-start;
+    }
+    .feat-icon {
+      font-size: 1.5rem; flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: rgba(230,51,41,0.1);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feat-text h4 {
+      font-family: var(--font-head);
+      font-size: 1rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text); margin-bottom: 2px;
+    }
+    .feat-text p { font-size: 0.85rem; color: var(--gray); line-height: 1.5; }
+
+    /* ─── MENU ───────────────────────────────────────────────── */
+    #menu { background: var(--bg); }
+    .menu-tabs {
+      display: flex; gap: 0; flex-wrap: wrap;
+      margin: 2.5rem 0 2rem;
+      border-bottom: 3px solid var(--border);
+    }
+    .menu-tab {
+      padding: 12px 28px;
+      font-family: var(--font-head);
+      font-size: 1rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gray);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      transition: all var(--transition);
+    }
+    .menu-tab.active { color: var(--red); border-bottom-color: var(--red); }
+    .menu-tab:hover:not(.active) { color: var(--text); }
+
+    .menu-panel { display: none; }
+    .menu-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+
+    .menu-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .menu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+    .menu-card-img {
+      height: 140px;
+      background: var(--light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-card-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.05));
+    }
+    .menu-bestseller {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: var(--font-head);
+      font-size: 0.7rem; font-weight: 900;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 2px;
+      z-index: 1;
+    }
+    .menu-card-body { padding: 1rem 1.2rem 1.2rem; }
+    .menu-card-name {
+      font-family: var(--font-head);
+      font-size: 1.3rem; font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .menu-card-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.5; margin-bottom: 0.8rem; }
+    .menu-card-footer {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .menu-price {
+      font-family: var(--font-head);
+      font-size: 1.4rem; font-weight: 900;
+      color: var(--red);
+    }
+    .menu-add {
+      width: 34px; height: 34px;
+      background: var(--red);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 1.2rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .menu-add:hover { background: var(--red-dark); transform: scale(1.1); }
+
+    /* Spicy indicator */
+    .spicy { color: var(--red); font-size: 0.8rem; margin-left: 4px; }
+
+    /* ─── SPECIALS / DEAL BANNER ─────────────────────────────── */
+    #deal {
+      background: var(--black);
+      padding: 5rem 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .deal-bg-text {
+      position: absolute;
+      font-family: var(--font-head);
+      font-size: 15rem; font-weight: 900;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.03);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      white-space: nowrap; letter-spacing: 10px;
+      pointer-events: none;
+    }
+    .deal-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .deal-content { }
+    .deal-tag {
+      font-family: var(--font-head);
+      font-size: 0.85rem; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 0.8rem; display: block;
+    }
+    .deal-title {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.95;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .deal-title em { color: var(--red); font-style: normal; }
+    .deal-desc { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.7; margin-bottom: 2rem; }
+    .deal-btn {
+      padding: 16px 40px;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: var(--font-head);
+      font-size: 1.15rem; font-weight: 900;
+      letter-spacing: 2px; text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: all var(--transition);
+      display: inline-block;
+    }
+    .deal-btn:hover { background: #e0b510; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,197,24,0.4); }
+
+    .deal-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .deal-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .deal-card:hover { border-color: var(--red); background: rgba(230,51,41,0.08); }
+    .deal-card-icon { font-size: 2.5rem; margin-bottom: 0.6rem; }
+    .deal-card-name {
+      font-family: var(--font-head);
+      font-size: 1rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: #fff; margin-bottom: 4px;
+    }
+    .deal-card-price {
+      font-family: var(--font-head);
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--yellow);
+    }
+    .deal-card-old {
+      font-size: 0.85rem; color: rgba(255,255,255,0.4);
+      text-decoration: line-through;
+    }
+
+    /* ─── GALLERY ────────────────────────────────────────────── */
+    #gallery { background: var(--surface); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(2, 220px);
+      gap: 12px;
+      margin-top: 2.5rem;
+    }
+    .gallery-item {
+      background: var(--light);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+      overflow: hidden;
+      position: relative;
+      transition: transform var(--transition);
+    }
+    .gallery-item:hover { transform: scale(1.02); }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; font-size: 8rem; }
+    .gallery-item:nth-child(2) { grid-column: span 2; }
+    .gallery-item:nth-child(3) { grid-column: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 1; }
+    .gallery-item:nth-child(5) { grid-column: span 2; }
+    .gallery-item:nth-child(6) { grid-column: span 1; }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(230,51,41,0.1), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* ─── TESTIMONIALS ───────────────────────────────────────── */
+    #testimonials { background: var(--bg); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .testi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .testi-card::before {
+      content: '"';
+      position: absolute; top: 1rem; right: 1.5rem;
+      font-family: var(--font-head);
+      font-size: 5rem; font-weight: 900;
+      color: var(--red); opacity: 0.15;
+      line-height: 1;
+    }
+    .testi-stars { color: var(--yellow); font-size: 1rem; margin-bottom: 0.8rem; }
+    .testi-text { font-size: 0.95rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.2rem; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 0.8rem; }
+    .testi-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; color: #fff;
+      font-family: var(--font-head); font-weight: 900;
+    }
+    .testi-name {
+      font-family: var(--font-head);
+      font-size: 1rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1px; color: var(--text);
+    }
+    .testi-source { font-size: 0.75rem; color: var(--gray); }
+
+    /* ─── CONTACT / ORDER ────────────────────────────────────── */
+    #contact { background: var(--surface); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+      margin-top: 2.5rem;
+    }
+    .contact-form { }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
+      font-family: var(--font-head);
+      font-size: 0.85rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 12px 16px;
+      background: var(--bg); border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font-body); font-size: 1rem;
+      color: var(--text);
+      transition: border-color var(--transition);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--red); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      width: 100%; padding: 15px;
+      background: var(--red); color: #fff;
+      font-family: var(--font-head); font-size: 1.1rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: all var(--transition);
+    }
+    .form-submit:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,51,41,0.35); }
+
+    .contact-info { }
+    .info-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .info-block h3 {
+      font-family: var(--font-head);
+      font-size: 1rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--red); margin-bottom: 0.6rem;
+    }
+    .info-line { display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 4px; }
+    .info-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 2px; }
+    .info-text { font-size: 0.9rem; color: var(--gray); line-height: 1.5; }
+
+    .hours-table { width: 100%; font-size: 0.9rem; }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table td { padding: 6px 0; color: var(--gray); }
+    .hours-table td:last-child { text-align: right; font-weight: 600; color: var(--text); }
+    .hours-table tr.today td { color: var(--red); font-weight: 600; }
+
+    /* Map */
+    .map-wrapper {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+    .map-wrapper iframe { width: 100%; height: 220px; border: none; display: block; }
+
+    /* ─── NEWSLETTER ─────────────────────────────────────────── */
+    #newsletter {
+      background: var(--red);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .newsletter-inner { max-width: 600px; margin: 0 auto; }
+    .newsletter-inner h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900; text-transform: uppercase;
+      color: #fff; margin-bottom: 0.5rem;
+    }
+    .newsletter-inner p { color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; font-size: 1rem; }
+    .newsletter-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto; }
+    .newsletter-form input {
+      flex: 1; padding: 14px 18px;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.3);
+      border-right: none;
+      border-radius: var(--radius) 0 0 var(--radius);
+      color: #fff; font-family: var(--font-body); font-size: 0.95rem;
+      outline: none;
+    }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.6); }
+    .newsletter-form input:focus { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.2); }
+    .newsletter-form button {
+      padding: 14px 24px;
+      background: var(--black);
+      color: #fff;
+      font-family: var(--font-head); font-size: 0.95rem; font-weight: 800;
+      letter-spacing: 1px; text-transform: uppercase;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      transition: background var(--transition);
+    }
+    .newsletter-form button:hover { background: #333; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      color: rgba(255,255,255,0.7);
+      padding: 4rem 2rem 2rem;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .footer-brand .logo {
+      font-family: var(--font-head);
+      font-size: 2.2rem; font-weight: 900;
+      letter-spacing: 3px; color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .footer-brand .logo span { color: var(--red); }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.2rem; color: rgba(255,255,255,0.55); }
+    .social-links { display: flex; gap: 0.8rem; }
+    .social-link {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: rgba(255,255,255,0.7);
+      transition: all var(--transition);
+    }
+    .social-link:hover { background: var(--red); color: #fff; }
+
+    .footer-col h4 {
+      font-family: var(--font-head);
+      font-size: 0.9rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #fff; margin-bottom: 1rem;
+    }
+    .footer-col a {
+      display: block; margin-bottom: 0.5rem;
+      font-size: 0.9rem; color: rgba(255,255,255,0.55);
+      transition: color var(--transition);
+    }
+    .footer-col a:hover { color: var(--red); }
+
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.85rem; color: rgba(255,255,255,0.35);
+      flex-wrap: wrap; gap: 0.5rem;
+    }
+    .footer-bottom a { color: var(--red); }
+
+    /* ─── FLOATING CTA ───────────────────────────────────────── */
+    #float-cta {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      align-items: flex-end;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    #float-cta.hidden { opacity:0; pointer-events:none; transform: translateY(20px); }
+
+    .float-btn {
+      padding: 13px 22px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: 1rem; font-weight: 800;
+      letter-spacing: 1px; text-transform: uppercase;
+      border-radius: 50px;
+      display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 6px 24px rgba(230,51,41,0.45);
+      transition: all var(--transition);
+    }
+    .float-btn:hover { background: var(--red-dark); transform: scale(1.05); }
+    .float-btn.secondary {
+      background: var(--yellow);
+      color: var(--black);
+      box-shadow: 0 6px 24px rgba(245,197,24,0.35);
+      font-size: 0.85rem; padding: 10px 18px;
+    }
+    .float-btn.secondary:hover { background: #e0b510; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .hero-text { order: 2; }
+      .hero-visual { order: 1; }
+      .hero-sub { margin: 0 auto 2rem; }
+      .hero-actions { justify-content: center; }
+      .hero-plate { width: 260px; height: 260px; }
+      .big-burger-icon { font-size: 6rem; }
+      .about-grid, .deal-inner, .contact-grid { grid-template-columns: 1fr; }
+      .about-visual { order: -1; }
+      .about-img-box { height: 300px; }
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 180px); }
+      .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; font-size: 5rem; }
+      .gallery-item:nth-child(2),
+      .gallery-item:nth-child(3),
+      .gallery-item:nth-child(4),
+      .gallery-item:nth-child(5),
+      .gallery-item:nth-child(6) { grid-column: span 1; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .testi-grid { grid-template-columns: 1fr 1fr; }
+      .deal-cards { }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-order-btn { display: none; }
+      .nav-hamburger { display: flex; }
+      section { padding: 4rem 1.5rem; }
+      .menu-panel.active { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .deal-cards { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .about-features { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; gap: 0.5rem; }
+      .newsletter-form input { border-right: 2px solid rgba(255,255,255,0.3); border-radius: var(--radius); }
+      .newsletter-form button { border-radius: var(--radius); }
+    }
+
+    @media (max-width: 480px) {
+      .hero-plate { width: 200px; height: 200px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ LOADER ══════════ -->
+<div id="loader">
+  <div class="loader-burger">
+    <div class="bun-top"></div>
+    <div class="lettuce"></div>
+    <div class="cheese"></div>
+    <div class="patty"></div>
+    <div class="bun-bot"></div>
+  </div>
+  <div class="loader-text">SM<span>A</span>SH</div>
+</div>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav id="navbar">
+  <div class="nav-logo">SM<span>A</span>SH</div>
+
+  <ul class="nav-links">
+    <li><a href="#about"    data-i18n="nav_story">Story</a></li>
+    <li><a href="#menu"     data-i18n="nav_menu">Menu</a></li>
+    <li><a href="#deal"     data-i18n="nav_deals">Deals</a></li>
+    <li><a href="#gallery"  data-i18n="nav_gallery">Gallery</a></li>
+    <li><a href="#contact"  data-i18n="nav_contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <button class="dark-toggle" id="darkToggle" title="Toggle Dark Mode">🌙</button>
+    <a href="#contact" class="nav-order-btn" data-i18n="nav_order">Jetzt Bestellen</a>
+  </div>
+
+  <div class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#about"   data-i18n="nav_story"  onclick="closeMobileNav()">Story</a>
+  <a href="#menu"    data-i18n="nav_menu"   onclick="closeMobileNav()">Menu</a>
+  <a href="#deal"    data-i18n="nav_deals"  onclick="closeMobileNav()">Deals</a>
+  <a href="#gallery" data-i18n="nav_gallery" onclick="closeMobileNav()">Gallery</a>
+  <a href="#contact" data-i18n="nav_contact" onclick="closeMobileNav()">Contact</a>
+  <a href="#contact" data-i18n="nav_order"   onclick="closeMobileNav()">Jetzt Bestellen</a>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stripes"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="hero-badge" data-i18n="hero_badge">#1 Burger in Hannover</span>
+      <h1 class="hero-h1">
+        <span data-i18n="hero_h1_line1">KEIN<br></span>
+        <span class="accent" data-i18n="hero_h1_line2">FILTER.<br></span>
+        <span class="accent-y" data-i18n="hero_h1_line3">NUR GESCHMACK.</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        Frisch gesmashte Smashburger, knusprige Fries und legendäre Soßen – direkt aus Hannover mit Liebe und viel Feuer.
+      </p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-primary" data-i18n="hero_cta_menu">🍔 Menü ansehen</a>
+        <a href="#contact" class="btn-outline" data-i18n="hero_cta_order">Jetzt bestellen</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-plate">
+        <div class="big-burger-icon">🍔</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span data-i18n="scroll">Scroll</span>
+  </div>
+</section>
+
+<!-- ══════════ STATS ══════════ -->
+<div id="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">250+</span>
+      <span class="stat-label" data-i18n="stat1">Burger täglich</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">4.9★</span>
+      <span class="stat-label" data-i18n="stat2">Google Rating</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <span class="stat-label" data-i18n="stat3">Frisches Fleisch</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">3 Min</span>
+      <span class="stat-label" data-i18n="stat4">Wartezeit</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-img-box">
+          🍔
+          <div class="about-badge">
+            <span class="big">2019</span>
+            <span class="small" data-i18n="badge_founded">Gegründet</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-content reveal">
+        <span class="section-tag" data-i18n="about_tag">Unsere Story</span>
+        <h2 class="section-title" data-i18n="about_title">BORN TO<br>SMASH.</h2>
+        <p class="section-sub" data-i18n="about_p1">
+          SMASH entstand aus einer einfachen Überzeugung: Ein guter Burger braucht keine Kompromisse. Nur das beste Fleisch, frische Zutaten, und die perfekte Technik – der Smash.
+        </p>
+        <p class="section-sub" style="margin-top:0.8rem;" data-i18n="about_p2">
+          Wir pressen jedes Patty direkt auf der heißen Platte – das gibt die unwiderstehliche Kruste und den intensiven Geschmack, für den SMASH in ganz Hannover bekannt ist.
+        </p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="feat-icon">🥩</div>
+            <div class="feat-text">
+              <h4 data-i18n="feat1_title">100% Rindfleisch</h4>
+              <p data-i18n="feat1_desc">Täglich frisch geliefert, niemals tiefgefroren.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feat-icon">🔥</div>
+            <div class="feat-text">
+              <h4 data-i18n="feat2_title">Smash-Technik</h4>
+              <p data-i18n="feat2_desc">400°C Platte für die perfekte Maillard-Kruste.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feat-icon">🌿</div>
+            <div class="feat-text">
+              <h4 data-i18n="feat3_title">Frische Zutaten</h4>
+              <p data-i18n="feat3_desc">Lokal eingekauft, täglich frisch zubereitet.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feat-icon">⚡</div>
+            <div class="feat-text">
+              <h4 data-i18n="feat4_title">Ultra-schnell</h4>
+              <p data-i18n="feat4_desc">Dein Burger in unter 3 Minuten – garantiert.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MENU ══════════ -->
+<section id="menu">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-i18n="menu_tag">Was wir machen</span>
+    <h2 class="section-title reveal" data-i18n="menu_title">DIE KARTE.</h2>
+    <p class="section-sub reveal" data-i18n="menu_sub">Smashburger, Fries, Saucen & Drinks – alles was du brauchst, nichts was du nicht brauchst.</p>
+
+    <div class="menu-tabs">
+      <button class="menu-tab active" data-tab="burgers" data-i18n="tab_burgers">Burger</button>
+      <button class="menu-tab" data-tab="sides" data-i18n="tab_sides">Beilagen</button>
+      <button class="menu-tab" data-tab="sauces" data-i18n="tab_sauces">Soßen</button>
+      <button class="menu-tab" data-tab="drinks" data-i18n="tab_drinks">Drinks</button>
+    </div>
+
+    <!-- BURGERS -->
+    <div class="menu-panel active" id="tab-burgers">
+      <div class="menu-card reveal">
+        <div class="menu-card-img">
+          🍔
+          <span class="menu-bestseller" data-i18n="bestseller">Bestseller</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">THE CLASSIC SMASH</div>
+          <p class="menu-card-desc" data-i18n="burger1_desc">Doppeltes Patty, Cheddar, Caramelized Onions, Smash-Sauce, Brioche Bun.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">8,90 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🌶️</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">HELL FIRE <span class="spicy">🌶️🌶️</span></div>
+          <p class="menu-card-desc" data-i18n="burger2_desc">Jalapeños, scharfe Chili-Sauce, Pepper Jack, Zwiebeln, Sriracha Mayo.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">9,50 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🧀</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">TRIPLE CHEESE</div>
+          <p class="menu-card-desc" data-i18n="burger3_desc">Drei Käsesorten: Cheddar, American, Gouda – extra cheesy, extra gut.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">10,20 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🥓</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">SMOKE & BACON</div>
+          <p class="menu-card-desc" data-i18n="burger4_desc">Crispy Bacon, Smoked BBQ Sauce, Cheddar, Röstzwiebeln, Gurken.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">10,90 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🌿</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">VEGGIE SMASH</div>
+          <p class="menu-card-desc" data-i18n="burger5_desc">Plant-Based Patty, Avocado, Rucola, Tomaten, Zitronen-Aioli.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">9,90 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">👑</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">THE BIG SMASH</div>
+          <p class="menu-card-desc" data-i18n="burger6_desc">Drei Patties, Bacon, Triple Cheese, hausgemachte Special Sauce.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">13,90 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDES -->
+    <div class="menu-panel" id="tab-sides">
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🍟
+          <span class="menu-bestseller" data-i18n="bestseller">Bestseller</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name" data-i18n="side1_name">SMASH FRIES</div>
+          <p class="menu-card-desc" data-i18n="side1_desc">Knusprige Pommes mit SMASH-Gewürz, serviert in der Box.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">3,50 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🧅</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name" data-i18n="side2_name">ONION RINGS</div>
+          <p class="menu-card-desc" data-i18n="side2_desc">Dicke, knusprige Zwiebelringe im Bierteig, mit Dip nach Wahl.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">4,50 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🧀</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">CHEESE FRIES</div>
+          <p class="menu-card-desc" data-i18n="side3_desc">Smash Fries überbacken mit flüssigem Cheddar und Jalapeños.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">5,50 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAUCES -->
+    <div class="menu-panel" id="tab-sauces">
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🥣
+          <span class="menu-bestseller" data-i18n="bestseller">Bestseller</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">SMASH SAUCE</div>
+          <p class="menu-card-desc" data-i18n="sauce1_desc">Unser Hausrezept – cremig, rauchig, perfekt. Streng geheim.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">0,80 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🌶️</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">SRIRACHA MAYO</div>
+          <p class="menu-card-desc" data-i18n="sauce2_desc">Cremige Mayo mit Sriracha-Kick. Für alle die es etwas schärfer mögen.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">0,80 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🍯</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">HONEY MUSTARD</div>
+          <p class="menu-card-desc" data-i18n="sauce3_desc">Süß-scharfer Honigsenf, hausgemacht. Perfekt zu Onion Rings.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">0,80 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="menu-panel" id="tab-drinks">
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🥤</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name" data-i18n="drink1_name">SOFTDRINKS</div>
+          <p class="menu-card-desc" data-i18n="drink1_desc">Cola, Fanta, Sprite – 0,5L Becher mit Eiswürfeln.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">2,50 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🍺</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name" data-i18n="drink2_name">CRAFT BIER</div>
+          <p class="menu-card-desc" data-i18n="drink2_desc">Lokales Craft Beer vom Fass – frisch gezapft, kalt serviert.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">3,80 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-card-img">🥛</div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">MILKSHAKE</div>
+          <p class="menu-card-desc" data-i18n="drink3_desc">Vanilla, Chocolate, Strawberry – thick & creamy, handgemacht.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">4,50 €</span>
+            <button class="menu-add">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DEALS ══════════ -->
+<section id="deal">
+  <div class="deal-bg-text" data-i18n="deal_bg">DEALS</div>
+  <div class="deal-inner">
+    <div class="deal-content reveal">
+      <span class="deal-tag" data-i18n="deal_tag">Diese Woche</span>
+      <h2 class="deal-title" data-i18n="deal_title">WEEKLY<br><em>DEALS.</em></h2>
+      <p class="deal-desc" data-i18n="deal_desc">
+        Jeden Tag eine andere Aktion. Folge uns auf Instagram um keinen Deal zu verpassen – und komm einfach rein für dein Daily Special.
+      </p>
+      <a href="#contact" class="deal-btn" data-i18n="deal_cta">Alle Deals ansehen →</a>
+    </div>
+    <div class="deal-cards reveal">
+      <div class="deal-card">
+        <div class="deal-card-icon">🍔</div>
+        <div class="deal-card-name" data-i18n="dc1_name">Montag</div>
+        <div class="deal-card-price">6,90 €</div>
+        <div class="deal-card-old">8,90 €</div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-card-icon">🍟</div>
+        <div class="deal-card-name" data-i18n="dc2_name">Burger + Fries</div>
+        <div class="deal-card-price">11,90 €</div>
+        <div class="deal-card-old">14,40 €</div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-card-icon">👥</div>
+        <div class="deal-card-name" data-i18n="dc3_name">Duo Deal</div>
+        <div class="deal-card-price">17,90 €</div>
+        <div class="deal-card-old">21,80 €</div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-card-icon">🎓</div>
+        <div class="deal-card-name" data-i18n="dc4_name">Student</div>
+        <div class="deal-card-price">-15%</div>
+        <div class="deal-card-old" data-i18n="dc4_sub">mit Ausweis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section id="gallery">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-i18n="gallery_tag">Fotos</span>
+    <h2 class="section-title reveal" data-i18n="gallery_title">FOOD PORN.</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">🍔</div>
+      <div class="gallery-item reveal">🍟</div>
+      <div class="gallery-item reveal">🧀</div>
+      <div class="gallery-item reveal">🥩</div>
+      <div class="gallery-item reveal">🌶️</div>
+      <div class="gallery-item reveal">🥤</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section id="testimonials">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-i18n="testi_tag">Kundenstimmen</span>
+    <h2 class="section-title reveal" data-i18n="testi_title">HANNOVER LIEBT SMASH.</h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" data-i18n="testi1">"Bester Burger in Hannover – und ich habe viele probiert. Die Smash-Technik macht wirklich den Unterschied. Absolute Empfehlung!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div>
+            <div class="testi-name">Markus K.</div>
+            <div class="testi-source">Google Review</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" data-i18n="testi2">"Schnell, lecker, fair im Preis. Der Classic Smash ist mein wöchentliches Ritual. Das Personal ist super freundlich!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">S</div>
+          <div>
+            <div class="testi-name">Sarah L.</div>
+            <div class="testi-source">Google Review</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" data-i18n="testi3">"Hell Fire hat mich erwischt – scharf aber unglaublich lecker. Ich komme mindestens zweimal pro Woche. SMASH ist das Beste!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div>
+            <div class="testi-name">Alex R.</div>
+            <div class="testi-source">Google Review</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-tag reveal" data-i18n="contact_tag">Bestellen & Besuchen</span>
+    <h2 class="section-title reveal" data-i18n="contact_title">KOMM VORBEI.</h2>
+    <div class="contact-grid">
+      <div class="contact-form reveal">
+        <h3 style="font-family:var(--font-head);font-size:1.4rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.2rem;" data-i18n="form_title">Tischreservierung</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form_name">Name</label>
+            <input type="text" :placeholder="t('form_name_ph')" data-i18n-ph="form_name_ph" placeholder="Max Mustermann" />
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_phone">Telefon</label>
+            <input type="tel" placeholder="+49 511 ..." />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form_date">Datum</label>
+            <input type="date" />
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_guests">Personen</label>
+            <select>
+              <option>1</option>
+              <option>2</option>
+              <option>3–4</option>
+              <option>5–8</option>
+              <option>8+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_note">Anmerkung</label>
+          <textarea data-i18n-ph="form_note_ph" placeholder="Besonderer Anlass, Allergien, etc."></textarea>
+        </div>
+        <button class="form-submit" data-i18n="form_submit">Tisch reservieren →</button>
+      </div>
+
+      <div class="contact-info reveal">
+        <div class="info-block">
+          <h3 data-i18n="info_location">Standort</h3>
+          <div class="info-line">
+            <span class="info-icon">📍</span>
+            <span class="info-text">Lister Meile 42, 30161 Hannover</span>
+          </div>
+          <div class="info-line">
+            <span class="info-icon">📞</span>
+            <span class="info-text">+49 511 123 456 78</span>
+          </div>
+          <div class="info-line">
+            <span class="info-icon">✉️</span>
+            <span class="info-text">hallo@smash-hannover.de</span>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <h3 data-i18n="info_hours">Öffnungszeiten</h3>
+          <table class="hours-table">
+            <tr>
+              <td data-i18n="day_mo_fr">Mo – Fr</td>
+              <td>11:00 – 22:00</td>
+            </tr>
+            <tr class="today">
+              <td data-i18n="day_sa">Samstag</td>
+              <td>11:00 – 23:00</td>
+            </tr>
+            <tr>
+              <td data-i18n="day_so">Sonntag</td>
+              <td>12:00 – 21:00</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2434.3!2d9.7392!3d52.3759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b00b514d494f15%3A0x425ac6d94ac4720!2sHannover!5e0!3m2!1sen!2sde!4v1711000000000!5m2!1sen!2sde"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ NEWSLETTER ══════════ -->
+<section id="newsletter">
+  <div class="newsletter-inner reveal">
+    <h2 data-i18n="nl_title">KEIN DEAL VERPASSEN.</h2>
+    <p data-i18n="nl_sub">Melde dich an und erhalte wöchentliche Deals, neue Burgernews und exklusive Rabatte.</p>
+    <div class="newsletter-form">
+      <input type="email" data-i18n-ph="nl_ph" placeholder="deine@email.de" />
+      <button data-i18n="nl_btn">Anmelden</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">SM<span>A</span>SH</div>
+      <p data-i18n="footer_desc">Hannover's #1 Smashburger – Fresh. Bold. Fast.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Instagram">📸</a>
+        <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+        <a href="#" class="social-link" aria-label="Facebook">👤</a>
+        <a href="#" class="social-link" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_nav">Navigation</h4>
+      <a href="#about"   data-i18n="nav_story">Story</a>
+      <a href="#menu"    data-i18n="nav_menu">Menu</a>
+      <a href="#deal"    data-i18n="nav_deals">Deals</a>
+      <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_menu">Beliebtes</h4>
+      <a href="#menu">Classic Smash</a>
+      <a href="#menu">Hell Fire</a>
+      <a href="#menu">Triple Cheese</a>
+      <a href="#menu">Smash Fries</a>
+      <a href="#menu">Milkshake</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_legal">Rechtliches</h4>
+      <a href="#" data-i18n="footer_imprint">Impressum</a>
+      <a href="#" data-i18n="footer_privacy">Datenschutz</a>
+      <a href="#" data-i18n="footer_agb">AGB</a>
+      <a href="#" data-i18n="footer_allergens">Allergene</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 SMASH Hannover. <span data-i18n="footer_rights">Alle Rechte vorbehalten.</span></span>
+    <span data-i18n="footer_made">Made with 🔥 in Hannover</span>
+  </div>
+  <div style="max-width:1200px;margin:0.8rem auto 0;padding-top:0.8rem;border-top:1px solid rgba(255,255,255,0.06);font-size:0.8rem;color:rgba(255,255,255,0.25);display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+    <span>Template by <a href="mailto:vinayakganiger445@gmail.com" style="color:rgba(255,255,255,0.35);text-decoration:underline;">Vinayak Ganiger</a></span>
+    <a href="https://wa.me/4916364141​97?text=Hi%2C%20I%27m%20interested%20in%20a%20website%20for%20my%20restaurant" target="_blank" style="color:rgba(255,255,255,0.35);text-decoration:underline;">💬 WhatsApp</a>
+    <a href="mailto:vinayakganiger445@gmail.com" style="color:rgba(255,255,255,0.35);text-decoration:underline;">✉️ vinayakganiger445@gmail.com</a>
+  </div>
+</footer>
+
+<!-- ══════════ FLOATING CTA ══════════ -->
+<div id="float-cta">
+  <a href="tel:+4951112345678" class="float-btn secondary">📞 <span data-i18n="float_call">Anrufen</span></a>
+  <a href="#contact" class="float-btn">🍔 <span data-i18n="float_order">Jetzt bestellen</span></a>
+</div>
+
+<!-- ══════════ JAVASCRIPT ══════════ -->
+<script>
+/* ─── TRANSLATIONS ────────────────────────────────────────── */
+const translations = {
+  de: {
+    nav_story: "Story",
+    nav_menu: "Menü",
+    nav_deals: "Deals",
+    nav_gallery: "Galerie",
+    nav_contact: "Kontakt",
+    nav_order: "Jetzt Bestellen",
+    hero_badge: "#1 Burger in Hannover",
+    hero_h1_line1: "KEIN\n",
+    hero_h1_line2: "FILTER.\n",
+    hero_h1_line3: "NUR GESCHMACK.",
+    hero_sub: "Frisch gesmashte Smashburger, knusprige Fries und legendäre Soßen – direkt aus Hannover mit Liebe und viel Feuer.",
+    hero_cta_menu: "🍔 Menü ansehen",
+    hero_cta_order: "Jetzt bestellen",
+    scroll: "Scroll",
+    stat1: "Burger täglich",
+    stat2: "Google Bewertung",
+    stat3: "Frisches Fleisch",
+    stat4: "Wartezeit",
+    badge_founded: "Gegründet",
+    about_tag: "Unsere Story",
+    about_title: "BORN TO\nSMASH.",
+    about_p1: "SMASH entstand aus einer einfachen Überzeugung: Ein guter Burger braucht keine Kompromisse. Nur das beste Fleisch, frische Zutaten, und die perfekte Technik – der Smash.",
+    about_p2: "Wir pressen jedes Patty direkt auf der heißen Platte – das gibt die unwiderstehliche Kruste und den intensiven Geschmack, für den SMASH in ganz Hannover bekannt ist.",
+    feat1_title: "100% Rindfleisch",
+    feat1_desc: "Täglich frisch geliefert, niemals tiefgefroren.",
+    feat2_title: "Smash-Technik",
+    feat2_desc: "400°C Platte für die perfekte Maillard-Kruste.",
+    feat3_title: "Frische Zutaten",
+    feat3_desc: "Lokal eingekauft, täglich frisch zubereitet.",
+    feat4_title: "Ultra-schnell",
+    feat4_desc: "Dein Burger in unter 3 Minuten – garantiert.",
+    menu_tag: "Was wir machen",
+    menu_title: "DIE KARTE.",
+    menu_sub: "Smashburger, Fries, Saucen & Drinks – alles was du brauchst, nichts was du nicht brauchst.",
+    tab_burgers: "Burger",
+    tab_sides: "Beilagen",
+    tab_sauces: "Soßen",
+    tab_drinks: "Drinks",
+    bestseller: "Bestseller",
+    burger1_desc: "Doppeltes Patty, Cheddar, Caramelized Onions, Smash-Sauce, Brioche Bun.",
+    burger2_desc: "Jalapeños, scharfe Chili-Sauce, Pepper Jack, Zwiebeln, Sriracha Mayo.",
+    burger3_desc: "Drei Käsesorten: Cheddar, American, Gouda – extra cheesy, extra gut.",
+    burger4_desc: "Crispy Bacon, Smoked BBQ Sauce, Cheddar, Röstzwiebeln, Gurken.",
+    burger5_desc: "Plant-Based Patty, Avocado, Rucola, Tomaten, Zitronen-Aioli.",
+    burger6_desc: "Drei Patties, Bacon, Triple Cheese, hausgemachte Special Sauce.",
+    side1_name: "SMASH FRIES",
+    side1_desc: "Knusprige Pommes mit SMASH-Gewürz, serviert in der Box.",
+    side2_name: "ONION RINGS",
+    side2_desc: "Dicke, knusprige Zwiebelringe im Bierteig, mit Dip nach Wahl.",
+    side3_desc: "Smash Fries überbacken mit flüssigem Cheddar und Jalapeños.",
+    sauce1_desc: "Unser Hausrezept – cremig, rauchig, perfekt. Streng geheim.",
+    sauce2_desc: "Cremige Mayo mit Sriracha-Kick. Für alle die es etwas schärfer mögen.",
+    sauce3_desc: "Süß-scharfer Honigsenf, hausgemacht. Perfekt zu Onion Rings.",
+    drink1_name: "SOFTDRINKS",
+    drink1_desc: "Cola, Fanta, Sprite – 0,5L Becher mit Eiswürfeln.",
+    drink2_name: "CRAFT BIER",
+    drink2_desc: "Lokales Craft Beer vom Fass – frisch gezapft, kalt serviert.",
+    drink3_desc: "Vanilla, Chocolate, Strawberry – thick & creamy, handgemacht.",
+    deal_tag: "Diese Woche",
+    deal_bg: "DEALS",
+    deal_title: "WEEKLY\nDEALS.",
+    deal_desc: "Jeden Tag eine andere Aktion. Folge uns auf Instagram um keinen Deal zu verpassen – und komm einfach rein für dein Daily Special.",
+    deal_cta: "Alle Deals ansehen →",
+    dc1_name: "Montag Special",
+    dc2_name: "Burger + Fries",
+    dc3_name: "Duo Deal",
+    dc4_name: "Student",
+    dc4_sub: "mit Ausweis",
+    gallery_tag: "Fotos",
+    gallery_title: "FOOD PORN.",
+    testi_tag: "Kundenstimmen",
+    testi_title: "HANNOVER LIEBT SMASH.",
+    testi1: "\"Bester Burger in Hannover – und ich habe viele probiert. Die Smash-Technik macht wirklich den Unterschied. Absolute Empfehlung!\"",
+    testi2: "\"Schnell, lecker, fair im Preis. Der Classic Smash ist mein wöchentliches Ritual. Das Personal ist super freundlich!\"",
+    testi3: "\"Hell Fire hat mich erwischt – scharf aber unglaublich lecker. Ich komme mindestens zweimal pro Woche. SMASH ist das Beste!\"",
+    contact_tag: "Bestellen & Besuchen",
+    contact_title: "KOMM VORBEI.",
+    form_title: "Tischreservierung",
+    form_name: "Name",
+    form_name_ph: "Max Mustermann",
+    form_phone: "Telefon",
+    form_date: "Datum",
+    form_guests: "Personen",
+    form_note: "Anmerkung",
+    form_note_ph: "Besonderer Anlass, Allergien, etc.",
+    form_submit: "Tisch reservieren →",
+    info_location: "Standort",
+    info_hours: "Öffnungszeiten",
+    day_mo_fr: "Mo – Fr",
+    day_sa: "Samstag",
+    day_so: "Sonntag",
+    nl_title: "KEIN DEAL VERPASSEN.",
+    nl_sub: "Melde dich an und erhalte wöchentliche Deals, neue Burgernews und exklusive Rabatte.",
+    nl_ph: "deine@email.de",
+    nl_btn: "Anmelden",
+    footer_desc: "Hannover's #1 Smashburger – Fresh. Bold. Fast.",
+    footer_nav: "Navigation",
+    footer_menu: "Beliebtes",
+    footer_legal: "Rechtliches",
+    footer_imprint: "Impressum",
+    footer_privacy: "Datenschutz",
+    footer_agb: "AGB",
+    footer_allergens: "Allergene",
+    footer_rights: "Alle Rechte vorbehalten.",
+    footer_made: "Made with 🔥 in Hannover",
+    float_call: "Anrufen",
+    float_order: "Jetzt bestellen",
+  },
+
+  en: {
+    nav_story: "Story",
+    nav_menu: "Menu",
+    nav_deals: "Deals",
+    nav_gallery: "Gallery",
+    nav_contact: "Contact",
+    nav_order: "Order Now",
+    hero_badge: "#1 Burger in Hannover",
+    hero_h1_line1: "NO\n",
+    hero_h1_line2: "FILTER.\n",
+    hero_h1_line3: "JUST FLAVOR.",
+    hero_sub: "Freshly smashed smashburgers, crispy fries and legendary sauces – straight from Hannover with love and a whole lot of fire.",
+    hero_cta_menu: "🍔 View Menu",
+    hero_cta_order: "Order Now",
+    scroll: "Scroll",
+    stat1: "Burgers Daily",
+    stat2: "Google Rating",
+    stat3: "Fresh Meat",
+    stat4: "Wait Time",
+    badge_founded: "Founded",
+    about_tag: "Our Story",
+    about_title: "BORN TO\nSMASH.",
+    about_p1: "SMASH was born from one simple belief: a great burger needs no compromises. Only the finest meat, fresh ingredients, and the perfect technique – the smash.",
+    about_p2: "We press every patty directly on a scorching hot griddle – that creates the irresistible crust and intense flavor that SMASH is famous for across Hannover.",
+    feat1_title: "100% Beef",
+    feat1_desc: "Delivered fresh daily, never frozen.",
+    feat2_title: "Smash Technique",
+    feat2_desc: "400°C griddle for the perfect Maillard crust.",
+    feat3_title: "Fresh Ingredients",
+    feat3_desc: "Sourced locally, prepared fresh every day.",
+    feat4_title: "Ultra-Fast",
+    feat4_desc: "Your burger in under 3 minutes – guaranteed.",
+    menu_tag: "What We Do",
+    menu_title: "THE MENU.",
+    menu_sub: "Smashburgers, fries, sauces & drinks – everything you need, nothing you don't.",
+    tab_burgers: "Burgers",
+    tab_sides: "Sides",
+    tab_sauces: "Sauces",
+    tab_drinks: "Drinks",
+    bestseller: "Bestseller",
+    burger1_desc: "Double patty, Cheddar, caramelized onions, Smash sauce, brioche bun.",
+    burger2_desc: "Jalapeños, hot chili sauce, Pepper Jack, onions, Sriracha mayo.",
+    burger3_desc: "Three cheeses: Cheddar, American, Gouda – extra cheesy, extra good.",
+    burger4_desc: "Crispy bacon, smoked BBQ sauce, Cheddar, crispy onions, pickles.",
+    burger5_desc: "Plant-based patty, avocado, rocket, tomatoes, lemon aioli.",
+    burger6_desc: "Three patties, bacon, triple cheese, house-made special sauce.",
+    side1_name: "SMASH FRIES",
+    side1_desc: "Crispy fries with SMASH seasoning, served in the box.",
+    side2_name: "ONION RINGS",
+    side2_desc: "Thick, crispy onion rings in beer batter, with dip of your choice.",
+    side3_desc: "Smash fries loaded with liquid cheddar and jalapeños.",
+    sauce1_desc: "Our house recipe – creamy, smoky, perfect. Top secret.",
+    sauce2_desc: "Creamy mayo with a Sriracha kick. For those who like it a little hotter.",
+    sauce3_desc: "Sweet and tangy honey mustard, house-made. Perfect with Onion Rings.",
+    drink1_name: "SOFT DRINKS",
+    drink1_desc: "Coke, Fanta, Sprite – 0.5L cup with ice cubes.",
+    drink2_name: "CRAFT BEER",
+    drink2_desc: "Local craft beer on tap – freshly poured, served cold.",
+    drink3_desc: "Vanilla, Chocolate, Strawberry – thick & creamy, handmade.",
+    deal_tag: "This Week",
+    deal_bg: "DEALS",
+    deal_title: "WEEKLY\nDEALS.",
+    deal_desc: "A different deal every day. Follow us on Instagram to never miss one – or just walk in for your daily special.",
+    deal_cta: "See all deals →",
+    dc1_name: "Monday Special",
+    dc2_name: "Burger + Fries",
+    dc3_name: "Duo Deal",
+    dc4_name: "Student",
+    dc4_sub: "with valid ID",
+    gallery_tag: "Photos",
+    gallery_title: "FOOD PORN.",
+    testi_tag: "Customer Reviews",
+    testi_title: "HANNOVER LOVES SMASH.",
+    testi1: "\"Best burger in Hannover – and I've tried many. The smash technique truly makes a difference. Absolute recommendation!\"",
+    testi2: "\"Fast, delicious, fair price. The Classic Smash is my weekly ritual. The staff is super friendly!\"",
+    testi3: "\"Hell Fire got me – spicy but incredibly tasty. I come at least twice a week. SMASH is the best!\"",
+    contact_tag: "Order & Visit",
+    contact_title: "COME ON IN.",
+    form_title: "Table Reservation",
+    form_name: "Name",
+    form_name_ph: "John Smith",
+    form_phone: "Phone",
+    form_date: "Date",
+    form_guests: "Guests",
+    form_note: "Notes",
+    form_note_ph: "Special occasion, allergies, etc.",
+    form_submit: "Reserve Table →",
+    info_location: "Location",
+    info_hours: "Opening Hours",
+    day_mo_fr: "Mon – Fri",
+    day_sa: "Saturday",
+    day_so: "Sunday",
+    nl_title: "NEVER MISS A DEAL.",
+    nl_sub: "Sign up and get weekly deals, new burger news and exclusive discounts.",
+    nl_ph: "your@email.com",
+    nl_btn: "Subscribe",
+    footer_desc: "Hannover's #1 Smashburger – Fresh. Bold. Fast.",
+    footer_nav: "Navigation",
+    footer_menu: "Popular",
+    footer_legal: "Legal",
+    footer_imprint: "Imprint",
+    footer_privacy: "Privacy Policy",
+    footer_agb: "Terms",
+    footer_allergens: "Allergens",
+    footer_rights: "All rights reserved.",
+    footer_made: "Made with 🔥 in Hannover",
+    float_call: "Call Us",
+    float_order: "Order Now",
+  }
+};
+
+/* ─── LANGUAGE ENGINE ─────────────────────────────────────── */
+let currentLang = localStorage.getItem('smash_lang') || 'de';
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('smash_lang', lang);
+  document.documentElement.lang = lang;
+
+  const t = translations[lang];
+
+  // Text content
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  // Placeholder text
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+
+  // Update active button
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+/* ─── DARK MODE ───────────────────────────────────────────── */
+const darkToggle = document.getElementById('darkToggle');
+const savedDark = localStorage.getItem('smash_dark') === 'true';
+if (savedDark) { document.body.classList.add('dark-mode'); darkToggle.textContent = '☀️'; }
+
+darkToggle.addEventListener('click', () => {
+  const isDark = document.body.classList.toggle('dark-mode');
+  darkToggle.textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('smash_dark', isDark);
+});
+
+/* ─── LOADER ──────────────────────────────────────────────── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 1600);
+});
+
+/* ─── NAVBAR SCROLL ───────────────────────────────────────── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ─── HAMBURGER MENU ──────────────────────────────────────── */
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  mobileNav.classList.toggle('open');
+});
+function closeMobileNav() { mobileNav.classList.remove('open'); }
+
+/* ─── MENU TABS ───────────────────────────────────────────── */
+document.querySelectorAll('.menu-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+/* ─── INTERSECTION OBSERVER ───────────────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ─── FLOATING CTA HIDE NEAR CONTACT ─────────────────────── */
+const floatCta = document.getElementById('float-cta');
+const contactSection = document.getElementById('contact');
+const floatObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    floatCta.classList.toggle('hidden', entry.isIntersecting);
+  });
+}, { threshold: 0.2 });
+floatObserver.observe(contactSection);
+
+/* ─── INIT LANGUAGE ───────────────────────────────────────── */
+applyLang(currentLang);
+</script>
+</body>
+</html>

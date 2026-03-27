@@ -1,0 +1,3169 @@
+<!--
+  ════════════════════════════════════════════════════
+  BLOOM CAFÉ – Restaurant Website Template
+  ════════════════════════════════════════════════════
+  Designed & Built by : Vinayak Ganiger
+  Co-created with     : Claude (Anthropic AI)
+  ────────────────────────────────────────────────────
+  📧 Email     : vinayakganiger445@gmail.com
+  💬 WhatsApp  : https://wa.me/4916364141​97
+  ────────────────────────────────────────────────────
+  Like this template? Need a custom website for your
+  restaurant? Get in touch — we build beautiful,
+  professional restaurant websites fast.
+  ════════════════════════════════════════════════════
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloom Café — Brunch & Coffee</title>
+  <meta name="description" content="Bloom Café — A warm, welcoming café serving handcrafted coffee and artisan brunch in the heart of the city." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       ROOT VARIABLES & RESET
+    ============================================= */
+    :root {
+      --cream:     #F7F2EA;
+      --cream-dark:#EDE5D4;
+      --terracotta:#C17F5A;
+      --terra-dark:#A0623C;
+      --brown:     #2E1A0E;
+      --brown-mid: #6B3F22;
+      --sage:      #8A9E76;
+      --sage-light:#B4C4A0;
+      --white:     #FFFFFF;
+      --text:      #3D2310;
+      --text-light:#7A5C45;
+      --border:    rgba(193,127,90,0.2);
+
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans:  'DM Sans', system-ui, sans-serif;
+
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow: 0 8px 40px rgba(46,26,14,0.10);
+      --shadow-hover: 0 16px 60px rgba(46,26,14,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 100px 0; }
+
+    /* =============================================
+       TYPOGRAPHY
+    ============================================= */
+    .serif { font-family: var(--font-serif); }
+
+    h1,h2,h3,h4 { font-family: var(--font-serif); line-height: 1.2; }
+
+    .section-label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--brown);
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      max-width: 540px;
+      line-height: 1.8;
+    }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 22px 0;
+      transition: background var(--transition), padding var(--transition), box-shadow var(--transition);
+    }
+
+    .nav.scrolled {
+      background: rgba(247,242,234,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 14px 0;
+      box-shadow: 0 2px 30px rgba(46,26,14,0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      transition: color var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .nav.scrolled .nav-logo { color: var(--brown); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.9);
+      transition: color var(--transition);
+    }
+
+    .nav.scrolled .nav-links a { color: var(--text); }
+    .nav-links a:hover { color: var(--terracotta); }
+
+    .nav-cta {
+      background: var(--terracotta);
+      color: var(--white) !important;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-weight: 600 !important;
+      transition: background var(--transition), transform var(--transition) !important;
+    }
+    .nav-cta:hover { background: var(--terra-dark) !important; transform: translateY(-1px); }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .nav.scrolled .nav-toggle span { background: var(--brown); }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1800&q=85&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(46,26,14,0.72) 0%,
+        rgba(46,26,14,0.45) 60%,
+        rgba(193,127,90,0.25) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--sage-light);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: var(--white);
+      margin-bottom: 24px;
+      line-height: 1.1;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: #F0D5B8;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 40px;
+      line-height: 1.8;
+      max-width: 500px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--terracotta);
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--terra-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(193,127,90,0.45);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      padding: 15px 32px;
+      border-radius: 100px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      transition: border-color var(--transition), background var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 2;
+      animation: bounce 2s infinite;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.4);
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* Hero badges */
+    .hero-badges {
+      position: absolute;
+      bottom: 48px;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-badge {
+      background: rgba(247,242,234,0.12);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-sm);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--white);
+    }
+
+    .hero-badge-icon {
+      font-size: 1.4rem;
+    }
+
+    .hero-badge-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-badge-text strong {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .hero-badge-text span {
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    /* =============================================
+       STATS STRIP
+    ============================================= */
+    .stats-strip {
+      background: var(--brown);
+      padding: 40px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 16px 24px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: var(--white);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* =============================================
+       ABOUT
+    ============================================= */
+    .about {
+      background: var(--white);
+      padding: 100px 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-images {
+      position: relative;
+      height: 580px;
+    }
+
+    .about-img-main {
+      position: absolute;
+      top: 0; left: 0;
+      width: 72%;
+      height: 85%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .about-img-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 52%;
+      height: 55%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+      border: 6px solid var(--cream);
+    }
+
+    .about-img-accent img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-badge {
+      position: absolute;
+      top: 40%;
+      left: 64%;
+      transform: translate(-50%, -50%);
+      background: var(--terracotta);
+      color: var(--white);
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      box-shadow: 0 8px 30px rgba(193,127,90,0.5);
+      z-index: 3;
+    }
+
+    .about-badge strong { font-size: 1.6rem; line-height: 1; }
+    .about-badge span   { font-size: 0.65rem; letter-spacing: 0.05em; opacity: 0.85; }
+
+    .about-content {}
+
+    .about-features {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .about-feature {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .feature-text h4 {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--brown);
+      margin-bottom: 4px;
+    }
+
+    .feature-text p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       MENU
+    ============================================= */
+    .menu-section {
+      background: var(--cream);
+      padding: 100px 0;
+    }
+
+    .menu-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .menu-header .section-sub {
+      margin: 0 auto;
+    }
+
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .menu-tab {
+      padding: 10px 24px;
+      border-radius: 100px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text-light);
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .menu-tab.active,
+    .menu-tab:hover {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: var(--white);
+    }
+
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .menu-item {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      box-shadow: 0 2px 16px rgba(46,26,14,0.05);
+      transition: box-shadow var(--transition), transform var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .menu-item:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .menu-item-img {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .menu-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .menu-item-info { flex: 1; }
+
+    .menu-item-info h4 {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--brown);
+      margin-bottom: 4px;
+    }
+
+    .menu-item-info p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .menu-item-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-price {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--terracotta);
+    }
+
+    .menu-tags {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 100px;
+      background: var(--cream);
+      color: var(--sage);
+      letter-spacing: 0.04em;
+    }
+
+    .tag.v  { background: #EFF5EA; color: #5A8040; }
+    .tag.gf { background: #FFF3EA; color: #C17F5A; }
+    .tag.p  { background: #FFF0F0; color: #C06060; }
+
+    /* =============================================
+       GALLERY
+    ============================================= */
+    .gallery-section {
+      background: var(--brown);
+      padding: 100px 0;
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+
+    .gallery-header .section-label { color: var(--sage-light); }
+    .gallery-header .section-title { color: var(--white); margin-bottom: 0; }
+
+    .gallery-link {
+      color: var(--sage-light);
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap var(--transition);
+      flex-shrink: 0;
+    }
+
+    .gallery-link:hover { gap: 12px; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, 240px);
+      gap: 12px;
+    }
+
+    .gallery-cell {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-cell:hover img { transform: scale(1.06); }
+
+    .gallery-cell:nth-child(1) { grid-column: span 5; }
+    .gallery-cell:nth-child(2) { grid-column: span 3; }
+    .gallery-cell:nth-child(3) { grid-column: span 4; }
+    .gallery-cell:nth-child(4) { grid-column: span 4; }
+    .gallery-cell:nth-child(5) { grid-column: span 4; }
+    .gallery-cell:nth-child(6) { grid-column: span 4; }
+
+    /* =============================================
+       TESTIMONIALS
+    ============================================= */
+    .testimonials {
+      background: var(--cream-dark);
+      padding: 100px 0;
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 2px 20px rgba(46,26,14,0.06);
+      transition: transform var(--transition), box-shadow var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .t-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: #F5A623;
+    }
+
+    .t-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--brown);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .t-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .t-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .t-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .t-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--brown);
+      display: block;
+    }
+
+    .t-platform {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    /* =============================================
+       RESERVATION
+    ============================================= */
+    .reservation {
+      background: var(--white);
+      padding: 100px 0;
+    }
+
+    .reservation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .reservation-content {}
+
+    .reservation-info {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .info-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .info-text h5 {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      color: var(--brown);
+      margin-bottom: 2px;
+    }
+
+    .info-text p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .reservation-form {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 40px;
+      border: 1px solid var(--border);
+    }
+
+    .reservation-form h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--brown);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 13px 16px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: border-color var(--transition);
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--terracotta);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--terracotta);
+      color: var(--white);
+      border: none;
+      border-radius: 100px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .form-submit:hover {
+      background: var(--terra-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(193,127,90,0.4);
+    }
+
+    /* =============================================
+       HOURS & MAP
+    ============================================= */
+    .hours-section {
+      background: var(--cream);
+      padding: 100px 0;
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .hours-card {
+      background: var(--brown);
+      border-radius: var(--radius);
+      padding: 48px;
+      color: var(--white);
+    }
+
+    .hours-card .section-label { color: var(--sage-light); }
+    .hours-card h2 { color: var(--white); margin-bottom: 36px; font-size: 2rem; }
+
+    .hours-list { display: flex; flex-direction: column; gap: 0; }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    .hours-row:last-child { border-bottom: none; }
+
+    .hours-row .day {
+      color: rgba(255,255,255,0.65);
+      font-weight: 400;
+    }
+
+    .hours-row .time {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .hours-row .closed { color: var(--terracotta); }
+
+    .hours-note {
+      margin-top: 24px;
+      padding: 16px;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    .map-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 380px;
+      background: linear-gradient(135deg, #d4c8b8 0%, #c5b9a9 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--brown-mid);
+      font-size: 2.5rem;
+    }
+
+    .map-placeholder p {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--brown-mid);
+    }
+
+    .map-info {
+      background: var(--white);
+      padding: 28px;
+    }
+
+    .map-info h4 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--brown);
+      margin-bottom: 10px;
+    }
+
+    .map-info p {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .map-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .map-btn {
+      padding: 9px 20px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      transition: all var(--transition);
+      background: transparent;
+      font-family: var(--font-sans);
+    }
+
+    .map-btn.primary {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: var(--white);
+    }
+
+    .map-btn:hover { opacity: 0.8; }
+
+    /* =============================================
+       NEWSLETTER
+    ============================================= */
+    .newsletter {
+      background: linear-gradient(135deg, var(--terracotta) 0%, #A0623C 100%);
+      padding: 80px 0;
+    }
+
+    .newsletter-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .newsletter-text {}
+
+    .newsletter-text h2 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .newsletter-text p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      flex: 1;
+      max-width: 440px;
+      min-width: 280px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px 20px;
+      border-radius: 100px;
+      border: none;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.65); }
+
+    .newsletter-form button {
+      padding: 14px 28px;
+      border-radius: 100px;
+      border: none;
+      background: var(--white);
+      color: var(--terracotta);
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+
+    .newsletter-form button:hover { transform: scale(1.04); }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--brown);
+      padding: 72px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .footer-brand p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+      max-width: 280px;
+      margin-bottom: 24px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
+      transition: background var(--transition), color var(--transition);
+      cursor: pointer;
+    }
+
+    .social-btn:hover {
+      background: var(--terracotta);
+      color: var(--white);
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-col ul li a {
+      font-size: 0.87rem;
+      color: rgba(255,255,255,0.5);
+      transition: color var(--transition);
+    }
+
+    .footer-col ul li a:hover { color: var(--terracotta); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-bottom-links a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      transition: color var(--transition);
+    }
+
+    .footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* =============================================
+       SCROLL ANIMATIONS
+    ============================================= */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-up-d1 { transition-delay: 0.1s; }
+    .fade-up-d2 { transition-delay: 0.2s; }
+    .fade-up-d3 { transition-delay: 0.3s; }
+    .fade-up-d4 { transition-delay: 0.4s; }
+
+    /* =============================================
+       MOBILE NAV OVERLAY
+    ============================================= */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--brown);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--white);
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:hover { color: var(--terracotta); }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .about-grid  { gap: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 72px 0; }
+
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+
+      .hero h1 { font-size: 2.6rem; }
+      .hero-badges { display: none; }
+
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+
+      .about-grid      { grid-template-columns: 1fr; }
+      .about-images    { height: 360px; }
+      .about-features  { grid-template-columns: 1fr; }
+
+      .menu-grid { grid-template-columns: 1fr; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-cell { grid-column: span 1 !important; height: 180px; }
+
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      .reservation-grid { grid-template-columns: 1fr; }
+      .form-row        { grid-template-columns: 1fr; }
+
+      .hours-grid { grid-template-columns: 1fr; }
+
+      .newsletter-inner { flex-direction: column; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .hero h1 { font-size: 2.2rem; }
+      .reservation-form { padding: 28px 20px; }
+      .hours-card { padding: 32px 24px; }
+    }
+
+    /* =============================================
+       LOADING SCREEN
+    ============================================= */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-flower {
+      position: relative;
+      width: 72px;
+      height: 72px;
+    }
+
+    .loader-petal {
+      position: absolute;
+      width: 22px;
+      height: 38px;
+      background: var(--terracotta);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      top: 50%;
+      left: 50%;
+      transform-origin: bottom center;
+      opacity: 0.85;
+      animation: petalSpin 1.6s ease-in-out infinite;
+    }
+
+    .loader-petal:nth-child(1)  { transform: translate(-50%, -100%) rotate(0deg);    animation-delay: 0s;    }
+    .loader-petal:nth-child(2)  { transform: translate(-50%, -100%) rotate(45deg);   animation-delay: 0.1s; }
+    .loader-petal:nth-child(3)  { transform: translate(-50%, -100%) rotate(90deg);   animation-delay: 0.2s; }
+    .loader-petal:nth-child(4)  { transform: translate(-50%, -100%) rotate(135deg);  animation-delay: 0.3s; }
+    .loader-petal:nth-child(5)  { transform: translate(-50%, -100%) rotate(180deg);  animation-delay: 0.4s; }
+    .loader-petal:nth-child(6)  { transform: translate(-50%, -100%) rotate(225deg);  animation-delay: 0.5s; }
+    .loader-petal:nth-child(7)  { transform: translate(-50%, -100%) rotate(270deg);  animation-delay: 0.6s; }
+    .loader-petal:nth-child(8)  { transform: translate(-50%, -100%) rotate(315deg);  animation-delay: 0.7s; }
+
+    .loader-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px; height: 18px;
+      background: var(--brown);
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    @keyframes petalSpin {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -100%) rotate(var(--r, 0deg)) scale(0.85); }
+      50%       { opacity: 1;   transform: translate(-50%, -100%) rotate(var(--r, 0deg)) scale(1.1); }
+    }
+
+    .loader-text {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--brown);
+      letter-spacing: 0.05em;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50%       { opacity: 1; }
+    }
+
+    /* =============================================
+       DARK MODE
+    ============================================= */
+    body.dark-mode {
+      --cream:      #1A1208;
+      --cream-dark: #221808;
+      --white:      #1E160A;
+      --text:       #E8D8C4;
+      --text-light: #B8997A;
+      --border:     rgba(193,127,90,0.18);
+      --brown:      #F0E4D4;
+      --brown-mid:  #D4B896;
+    }
+
+    body.dark-mode .about { background: #1E160A; }
+    body.dark-mode .reservation { background: #1A1208; }
+    body.dark-mode .menu-item { background: #221808; }
+    body.dark-mode .reservation-form { background: #221808; }
+    body.dark-mode .testimonial-card { background: #221808; }
+    body.dark-mode .map-info { background: #221808; }
+    body.dark-mode .hours-card { background: var(--terracotta); }
+    body.dark-mode .hours-card h2,
+    body.dark-mode .hours-card .day,
+    body.dark-mode .hours-card .time { color: var(--white); }
+    body.dark-mode .footer { background: #0E0A05; }
+    body.dark-mode .stats-strip { background: #0E0A05; }
+    body.dark-mode .nav.scrolled {
+      background: rgba(26,18,8,0.96);
+    }
+    body.dark-mode .nav.scrolled .nav-logo { color: var(--text); }
+    body.dark-mode .nav.scrolled .nav-links a { color: var(--text); }
+    body.dark-mode .nav.scrolled .nav-toggle span { color: var(--text); background: var(--text); }
+    body.dark-mode .section-title { color: var(--text); }
+    body.dark-mode .about-feature .feature-icon { background: #2A1E10; border-color: rgba(193,127,90,0.15); }
+    body.dark-mode .menu-tab { color: var(--text-light); }
+    body.dark-mode .t-quote { color: var(--text); }
+    body.dark-mode .t-name { color: var(--text); }
+    body.dark-mode .form-group input,
+    body.dark-mode .form-group select,
+    body.dark-mode .form-group textarea {
+      background: #2A1E10;
+      color: var(--text);
+      border-color: rgba(193,127,90,0.25);
+    }
+    body.dark-mode .map-info h4 { color: var(--text); }
+    body.dark-mode .map-info p { color: var(--text-light); }
+    body.dark-mode .map-btn { color: var(--text); border-color: rgba(193,127,90,0.25); }
+    body.dark-mode .hours-note { background: rgba(0,0,0,0.2); }
+    body.dark-mode .info-icon { background: #2A1E10; }
+    body.dark-mode .info-text h5 { color: var(--text); }
+    body.dark-mode .info-text p { color: var(--text-light); }
+    body.dark-mode .feature-text h4 { color: var(--text); }
+    body.dark-mode .about-badge { background: var(--terracotta); }
+    body.dark-mode .map-placeholder { background: linear-gradient(135deg, #2A1E10 0%, #1E1408 100%); }
+    body.dark-mode .map-placeholder p { color: var(--text-light); }
+
+    /* Dark mode toggle button */
+    .lang-switcher {
+      display: flex;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 100px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: border-color var(--transition);
+    }
+    .nav.scrolled .lang-switcher {
+      border-color: rgba(46,26,14,0.25);
+    }
+    .lang-btn {
+      padding: 5px 11px;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.75);
+      background: transparent;
+      border: none; cursor: pointer;
+      border-right: 1px solid rgba(255,255,255,0.25);
+      transition: all var(--transition);
+    }
+    .lang-btn:last-child { border-right: none; }
+    .lang-btn.active {
+      background: var(--terracotta);
+      color: #fff;
+    }
+    .lang-btn:hover:not(.active) {
+      background: rgba(193,127,90,0.15);
+      color: #fff;
+    }
+    .nav.scrolled .lang-btn {
+      color: var(--brown);
+    }
+    .nav.scrolled .lang-btn.active {
+      color: #fff;
+    }
+    .nav.scrolled .lang-btn { border-right-color: rgba(46,26,14,0.15); }
+
+    /* Dark mode toggle button */
+    .dark-toggle {
+      background: none;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 100px;
+      width: 40px;
+      height: 22px;
+      cursor: pointer;
+      position: relative;
+      transition: border-color var(--transition), background var(--transition);
+      flex-shrink: 0;
+    }
+
+    .nav.scrolled .dark-toggle {
+      border-color: rgba(46,26,14,0.3);
+    }
+
+    .dark-toggle::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      transition: transform var(--transition), background var(--transition);
+    }
+
+    .nav.scrolled .dark-toggle::after {
+      background: var(--brown);
+    }
+
+    body.dark-mode .dark-toggle {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+
+    body.dark-mode .dark-toggle::after {
+      transform: translateX(18px);
+      background: var(--white);
+    }
+
+    /* =============================================
+       FLOATING BOOK NOW BUTTON (mobile only)
+    ============================================= */
+    .float-book {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 998;
+      background: var(--terracotta);
+      color: var(--white);
+      padding: 15px 36px;
+      border-radius: 100px;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 30px rgba(193,127,90,0.55);
+      white-space: nowrap;
+      animation: floatBounce 3s ease-in-out infinite;
+      text-decoration: none;
+    }
+
+    @keyframes floatBounce {
+      0%, 100% { box-shadow: 0 8px 30px rgba(193,127,90,0.55); transform: translateX(-50%) translateY(0); }
+      50%       { box-shadow: 0 14px 40px rgba(193,127,90,0.45); transform: translateX(-50%) translateY(-4px); }
+    }
+
+    .float-book.hide { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+
+    @media (max-width: 768px) {
+      .float-book { display: block; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =================== LOADER =================== -->
+  <div id="loader">
+    <div class="loader-flower">
+      <div class="loader-petal"></div>
+      <div class="loader-petal"></div>
+      <div class="loader-petal"></div>
+      <div class="loader-petal"></div>
+      <div class="loader-petal"></div>
+      <div class="loader-petal"></div>
+      <div class="loader-petal"></div>
+      <div class="loader-petal"></div>
+      <div class="loader-center"></div>
+    </div>
+    <span class="loader-text">Bloom Café</span>
+  </div>
+
+  <!-- =================== FLOATING BOOK NOW (mobile) =================== -->
+  <a href="#reservation" class="float-book" id="floatBook">🌸 <span id="floatBookText">Book a Table</span></a>
+
+  <!-- =================== MOBILE MENU =================== -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="menuClose">✕</button>
+    <a href="#about"       onclick="closeMobile()">About</a>
+    <a href="#menu"        onclick="closeMobile()">Menu</a>
+    <a href="#gallery"     onclick="closeMobile()">Gallery</a>
+    <a href="#reservation" onclick="closeMobile()">Reserve</a>
+    <a href="#hours"       onclick="closeMobile()">Visit Us</a>
+  </div>
+
+  <!-- =================== NAVIGATION =================== -->
+  <nav class="nav" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          <div class="logo-icon">🌸</div>
+          Bloom Café
+        </a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#hours">Visit Us</a></li>
+          <li><a href="#reservation" class="nav-cta">Reserve a Table</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="de">DE</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>
+          <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+          <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =================== HERO =================== -->
+  <section class="hero" id="home">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Est. 2019 · Hannover, Germany</div>
+        <h1>Where Every Cup<br>Tells a <em>Story</em></h1>
+        <p>Handcrafted coffee, artisan brunch plates and warm moments — brewed with care in the heart of the city.</p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn-primary">Explore Our Menu →</a>
+          <a href="#reservation" class="btn-outline">Book a Table</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-badges container" style="position:absolute;bottom:48px;right:24px;left:auto;max-width:none;width:auto;">
+      <div class="hero-badge">
+        <div class="hero-badge-icon">⭐</div>
+        <div class="hero-badge-text">
+          <strong>4.9 / 5.0</strong>
+          <span>720+ Google Reviews</span>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-icon">🏆</div>
+        <div class="hero-badge-text">
+          <strong>Best Brunch 2024</strong>
+          <span>City Food Awards</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- =================== STATS STRIP =================== -->
+  <div class="stats-strip">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item fade-up">
+          <span class="stat-number">720+</span>
+          <span class="stat-label">Happy Reviews</span>
+        </div>
+        <div class="stat-item fade-up fade-up-d1">
+          <span class="stat-number">48</span>
+          <span class="stat-label">Menu Items</span>
+        </div>
+        <div class="stat-item fade-up fade-up-d2">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Years Open</span>
+        </div>
+        <div class="stat-item fade-up fade-up-d3">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Locally Sourced</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== ABOUT =================== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-images fade-up">
+          <div class="about-img-main">
+            <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=800&q=85&auto=format&fit=crop" alt="Bloom Café interior" loading="lazy" />
+          </div>
+          <div class="about-img-accent">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=85&auto=format&fit=crop" alt="Coffee art" loading="lazy" />
+          </div>
+          <div class="about-badge">
+            <strong>5+</strong>
+            <span>Years of<br>Passion</span>
+          </div>
+        </div>
+
+        <div class="about-content fade-up fade-up-d2">
+          <span class="section-label">Our Story</span>
+          <h2 class="section-title">A Place to Slow Down & Savour</h2>
+          <p class="section-sub">Born from a love of good coffee and unhurried mornings, Bloom Café opened in 2019 with one simple belief — that breakfast and brunch should feel like a celebration, not an afterthought.</p>
+          <p class="section-sub" style="margin-top:16px;">Every dish is made from scratch with locally sourced ingredients, and every cup is brewed by our trained baristas using single-origin beans we select personally.</p>
+
+          <div class="about-features">
+            <div class="about-feature fade-up fade-up-d1">
+              <div class="feature-icon">☕</div>
+              <div class="feature-text">
+                <h4>Specialty Coffee</h4>
+                <p>Single-origin beans, expert latte art</p>
+              </div>
+            </div>
+            <div class="about-feature fade-up fade-up-d2">
+              <div class="feature-icon">🌿</div>
+              <div class="feature-text">
+                <h4>Local Ingredients</h4>
+                <p>Seasonal produce, regional farms</p>
+              </div>
+            </div>
+            <div class="about-feature fade-up fade-up-d3">
+              <div class="feature-icon">🍳</div>
+              <div class="feature-text">
+                <h4>Made from Scratch</h4>
+                <p>Everything baked fresh daily</p>
+              </div>
+            </div>
+            <div class="about-feature fade-up fade-up-d4">
+              <div class="feature-icon">🌱</div>
+              <div class="feature-text">
+                <h4>Vegan Friendly</h4>
+                <p>Full plant-based menu available</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== MENU =================== -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <div class="menu-header fade-up">
+        <span class="section-label">What We Serve</span>
+        <h2 class="section-title">Crafted with Love</h2>
+        <p class="section-sub">From golden avocado toasts to rich eggs benedict — every plate is a reason to linger a little longer.</p>
+      </div>
+
+      <div class="menu-tabs fade-up">
+        <button class="menu-tab active" data-tab="brunch">🍳 Brunch</button>
+        <button class="menu-tab" data-tab="coffee">☕ Coffee</button>
+        <button class="menu-tab" data-tab="pastries">🥐 Pastries</button>
+        <button class="menu-tab" data-tab="drinks">🥤 Cold Drinks</button>
+      </div>
+
+      <!-- Brunch Panel -->
+      <div class="menu-panel active" id="tab-brunch">
+        <div class="menu-grid">
+          <div class="menu-item fade-up">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=200&q=80&auto=format&fit=crop" alt="Avocado Toast" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Avocado Sourdough Toast</h4>
+              <p>Smashed avo, poached egg, chili flakes, microgreens on toasted sourdough</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€12.50</span>
+                <div class="menu-tags">
+                  <span class="tag v">Vegan</span>
+                  <span class="tag gf">GF opt.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item fade-up fade-up-d1">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=200&q=80&auto=format&fit=crop" alt="Eggs Benedict" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Classic Eggs Benedict</h4>
+              <p>English muffin, smoked salmon, poached eggs, hollandaise, chives</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€14.90</span>
+                <div class="menu-tags">
+                  <span class="tag p">Chef's Pick</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item fade-up fade-up-d2">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=200&q=80&auto=format&fit=crop" alt="Pancakes" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Fluffy Ricotta Pancakes</h4>
+              <p>Whipped ricotta, seasonal berries, maple syrup, lemon zest butter</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€11.50</span>
+                <div class="menu-tags">
+                  <span class="tag v">Veg</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item fade-up fade-up-d3">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=200&q=80&auto=format&fit=crop" alt="Grain Bowl" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Bloom Grain Bowl</h4>
+              <p>Quinoa, roasted vegetables, soft-boiled egg, tahini dressing, seeds</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€13.90</span>
+                <div class="menu-tags">
+                  <span class="tag v">Vegan</span>
+                  <span class="tag gf">GF</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coffee Panel -->
+      <div class="menu-panel" id="tab-coffee">
+        <div class="menu-grid">
+          <div class="menu-item fade-up">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200&q=80&auto=format&fit=crop" alt="Flat White" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Signature Flat White</h4>
+              <p>Double ristretto, silky microfoam milk, roasted hazelnut notes</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€4.50</span>
+                <div class="menu-tags"><span class="tag v">Vegan opt.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item fade-up fade-up-d1">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=200&q=80&auto=format&fit=crop" alt="Cold Brew" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Cold Brew Tonic</h4>
+              <p>24h cold brew, premium tonic water, orange peel, a single ice cube</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€5.90</span>
+                <div class="menu-tags"><span class="tag p">Seasonal</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item fade-up fade-up-d2">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=200&q=80&auto=format&fit=crop" alt="Latte" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Rose Cardamom Latte</h4>
+              <p>Espresso, oat milk, house-made rose syrup, cardamom, edible rose petals</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€5.50</span>
+                <div class="menu-tags"><span class="tag v">Vegan</span><span class="tag p">Bestseller</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item fade-up fade-up-d3">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=200&q=80&auto=format&fit=crop" alt="Matcha" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Ceremonial Matcha</h4>
+              <p>Grade A ceremonial matcha, steamed oat milk, light honey drizzle</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€5.20</span>
+                <div class="menu-tags"><span class="tag v">Vegan</span><span class="tag gf">GF</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pastries Panel -->
+      <div class="menu-panel" id="tab-pastries">
+        <div class="menu-grid">
+          <div class="menu-item fade-up">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=200&q=80&auto=format&fit=crop" alt="Croissant" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Butter Croissant</h4>
+              <p>Classic French laminated pastry, 72-hour dough, pure French butter</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€3.80</span>
+                <div class="menu-tags"><span class="tag v">Veg</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item fade-up fade-up-d1">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=200&q=80&auto=format&fit=crop" alt="Cinnamon Roll" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Cardamom Cinnamon Roll</h4>
+              <p>Soft brioche dough, cinnamon sugar swirl, cream cheese glaze</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€4.50</span>
+                <div class="menu-tags"><span class="tag p">Fan Favourite</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drinks Panel -->
+      <div class="menu-panel" id="tab-drinks">
+        <div class="menu-grid">
+          <div class="menu-item fade-up">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1497534446932-c925b458314e?w=200&q=80&auto=format&fit=crop" alt="Smoothie" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>Green Detox Smoothie</h4>
+              <p>Spinach, mango, banana, coconut water, lime, fresh ginger</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€7.50</span>
+                <div class="menu-tags"><span class="tag v">Vegan</span><span class="tag gf">GF</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item fade-up fade-up-d1">
+            <div class="menu-item-img">
+              <img src="https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?w=200&q=80&auto=format&fit=crop" alt="Lemonade" loading="lazy" />
+            </div>
+            <div class="menu-item-info">
+              <h4>House Lavender Lemonade</h4>
+              <p>Fresh-squeezed lemon, house lavender syrup, sparkling water, mint</p>
+              <div class="menu-item-footer">
+                <span class="menu-price">€5.90</span>
+                <div class="menu-tags"><span class="tag v">Vegan</span><span class="tag p">Seasonal</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== GALLERY =================== -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="gallery-header">
+        <div>
+          <span class="section-label">Our World</span>
+          <h2 class="section-title">A Feast for the Eyes</h2>
+        </div>
+        <a href="#" class="gallery-link">Follow us @bloomcafe →</a>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-cell">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80&auto=format&fit=crop" alt="Café interior" loading="lazy" />
+        </div>
+        <div class="gallery-cell">
+          <img src="https://images.unsplash.com/photo-1572286258217-215cf8e9d99b?w=400&q=80&auto=format&fit=crop" alt="Coffee" loading="lazy" />
+        </div>
+        <div class="gallery-cell">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format&fit=crop" alt="Food" loading="lazy" />
+        </div>
+        <div class="gallery-cell">
+          <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&q=80&auto=format&fit=crop" alt="Café corner" loading="lazy" />
+        </div>
+        <div class="gallery-cell">
+          <img src="https://images.unsplash.com/photo-1502005097973-6a7082348e28?w=600&q=80&auto=format&fit=crop" alt="Brunch plate" loading="lazy" />
+        </div>
+        <div class="gallery-cell">
+          <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&q=80&auto=format&fit=crop" alt="Pastries" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== TESTIMONIALS =================== -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="testimonials-header fade-up">
+        <span class="section-label">Guest Love</span>
+        <h2 class="section-title">What People Are Saying</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-up">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-quote">"Best brunch spot in the city, full stop. The ricotta pancakes changed my life and the coffee is absolute perfection. I come every single Saturday."</p>
+          <div class="t-author">
+            <div class="t-avatar">
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80&auto=format&fit=crop&crop=face" alt="Emma R." loading="lazy" />
+            </div>
+            <div>
+              <span class="t-name">Emma R.</span>
+              <span class="t-platform">⭐ Google Review</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up fade-up-d2">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-quote">"The rose cardamom latte is something I didn't know I needed in my life. The ambiance is warm, cozy and the staff genuinely make you feel welcome."</p>
+          <div class="t-author">
+            <div class="t-avatar">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&auto=format&fit=crop&crop=face" alt="Marco L." loading="lazy" />
+            </div>
+            <div>
+              <span class="t-name">Marco L.</span>
+              <span class="t-platform">⭐ Google Review</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up fade-up-d3">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-quote">"I've tried cafés all across Europe and Bloom is genuinely one of the best. Incredible attention to detail in every single dish. Can't wait to come back."</p>
+          <div class="t-author">
+            <div class="t-avatar">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80&auto=format&fit=crop&crop=face" alt="Sofia M." loading="lazy" />
+            </div>
+            <div>
+              <span class="t-name">Sofia M.</span>
+              <span class="t-platform">⭐ Google Review</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== RESERVATION =================== -->
+  <section class="reservation" id="reservation">
+    <div class="container">
+      <div class="reservation-grid">
+        <div class="reservation-content fade-up">
+          <span class="section-label">Book a Table</span>
+          <h2 class="section-title">Reserve Your Morning Moment</h2>
+          <p class="section-sub">Whether it's a lazy Sunday with family or a catch-up with friends — we'd love to have you. Walk-ins welcome, but reservations get the best seats.</p>
+
+          <div class="reservation-info">
+            <div class="info-row">
+              <div class="info-icon">📞</div>
+              <div class="info-text">
+                <h5>Call Us</h5>
+                <p>+49 511 000 1234 · We're happy to help with group bookings</p>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon">✉️</div>
+              <div class="info-text">
+                <h5>Email</h5>
+                <p>hello@bloomcafe.de · We reply within a few hours</p>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon">📍</div>
+              <div class="info-text">
+                <h5>Find Us</h5>
+                <p>Lister Meile 12, 30161 Hannover, Germany</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reservation-form fade-up fade-up-d2">
+          <h3>Make a Reservation</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Emma" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Rosenberg" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" />
+            </div>
+            <div class="form-group">
+              <label>Time</label>
+              <select>
+                <option>09:00 AM</option>
+                <option>09:30 AM</option>
+                <option>10:00 AM</option>
+                <option>10:30 AM</option>
+                <option>11:00 AM</option>
+                <option>11:30 AM</option>
+                <option>12:00 PM</option>
+                <option>12:30 PM</option>
+                <option>01:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Guests</label>
+              <select>
+                <option>1 person</option>
+                <option>2 people</option>
+                <option selected>3–4 people</option>
+                <option>5–6 people</option>
+                <option>7+ people</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" placeholder="+49 511 ..." />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Special Requests</label>
+            <textarea placeholder="Dietary requirements, celebrations, seating preferences..."></textarea>
+          </div>
+          <button class="form-submit">Confirm Reservation →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== HOURS & MAP =================== -->
+  <section class="hours-section" id="hours">
+    <div class="container">
+      <div class="hours-grid">
+        <div class="hours-card fade-up">
+          <span class="section-label">When to Visit</span>
+          <h2>Opening Hours</h2>
+          <div class="hours-list">
+            <div class="hours-row">
+              <span class="day">Monday</span>
+              <span class="time closed">Closed</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Tuesday – Friday</span>
+              <span class="time">08:00 – 17:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Saturday</span>
+              <span class="time">08:00 – 18:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Sunday</span>
+              <span class="time">09:00 – 16:00</span>
+            </div>
+          </div>
+          <div class="hours-note">
+            🎉 Extended hours during public holidays and special events. Follow us on Instagram for updates.
+          </div>
+        </div>
+
+        <div class="map-card fade-up fade-up-d2">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.158!2d9.7520!3d52.3759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b00b514d494f85%3A0x425ac6d94ac4720!2sLister%20Meile%2C%20Hannover!5e0!3m2!1sen!2sde!4v1700000000000"
+            width="100%"
+            height="320"
+            style="border:0;display:block;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Bloom Café Location – Lister Meile 12, Hannover">
+          </iframe>
+          <div class="map-info">
+            <h4>Bloom Café — Hannover</h4>
+            <p>Lister Meile 12, 30161 Hannover, Germany<br>5 min walk from Lister Platz · Tram Line 3 & 7</p>
+            <div class="map-actions">
+              <button class="map-btn primary">Get Directions</button>
+              <button class="map-btn">Street View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== NEWSLETTER =================== -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-text">
+          <h2>Stay in the Loop 🌸</h2>
+          <p>New seasonal menus, events & exclusive offers — right to your inbox.</p>
+        </div>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="your@email.com" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>🌸 Bloom Café</h3>
+          <p>A warm corner of Hannover for those who believe good food and great coffee make everything better.</p>
+          <div class="footer-socials">
+            <div class="social-btn">📸</div>
+            <div class="social-btn">🐦</div>
+            <div class="social-btn">📘</div>
+            <div class="social-btn">📌</div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Visit</h4>
+          <ul>
+            <li><a href="#reservation">Reservations</a></li>
+            <li><a href="#hours">Opening Hours</a></li>
+            <li><a href="#hours">Find Us</a></li>
+            <li><a href="#">Catering</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+4951100001234">+49 511 000 1234</a></li>
+            <li><a href="mailto:hello@bloomcafe.de">hello@bloomcafe.de</a></li>
+            <li><a href="#">Press & Media</a></li>
+            <li><a href="#">Work with Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Bloom Café. All rights reserved. · Template by <a href="mailto:vinayakganiger445@gmail.com" style="color:rgba(255,255,255,0.5);text-decoration:underline;">Vinayak Ganiger</a> · <a href="https://wa.me/4916364141​97?text=Hi%2C%20I%27m%20interested%20in%20a%20website%20for%20my%20restaurant" target="_blank" style="color:rgba(255,255,255,0.5);text-decoration:underline;">💬 WhatsApp</a></p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Impressum</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =================== JAVASCRIPT =================== -->
+  <script>
+    // ---- LANGUAGE TRANSLATIONS ----
+    const translations = {
+      en: {
+        // Navigation
+        navAbout: 'About',
+        navMenu: 'Menu',
+        navGallery: 'Gallery',
+        navHours: 'Visit Us',
+        navReserve: 'Reserve a Table',
+        mobileAbout: 'About',
+        mobileMenu: 'Menu',
+        mobileGallery: 'Gallery',
+        mobileReserve: 'Reserve',
+        mobileHours: 'Visit Us',
+        
+        // Hero
+        heroEyebrow: 'Est. 2019 · Hannover, Germany',
+        heroHeading: 'Where Every Cup<br>Tells a <em>Story</em>',
+        heroSubheading: 'Handcrafted coffee, artisan brunch plates and warm moments — brewed with care in the heart of the city.',
+        heroBtn1: 'Explore Our Menu →',
+        heroBtn2: 'Book a Table',
+        heroBadge1Title: '4.9 / 5.0',
+        heroBadge1Subtitle: '720+ Google Reviews',
+        heroBadge2Title: 'Best Brunch 2024',
+        heroBadge2Subtitle: 'City Food Awards',
+        scrollText: 'Scroll',
+        floatBookText: 'Book a Table',
+        
+        // Stats
+        stat1Number: '720+',
+        stat1Label: 'Happy Reviews',
+        stat2Number: '48',
+        stat2Label: 'Menu Items',
+        stat3Number: '5',
+        stat3Label: 'Years Open',
+        stat4Number: '100%',
+        stat4Label: 'Locally Sourced',
+        
+        // About
+        aboutLabel: 'Our Story',
+        aboutTitle: 'A Place to Slow Down & Savour',
+        aboutPara1: 'Born from a love of good coffee and unhurried mornings, Bloom Café opened in 2019 with one simple belief — that breakfast and brunch should feel like a celebration, not an afterthought.',
+        aboutPara2: 'Every dish is made from scratch with locally sourced ingredients, and every cup is brewed by our trained baristas using single-origin beans we select personally.',
+        aboutBadge: '5+<br>Years of<br>Passion',
+        aboutFeature1: 'Specialty Coffee',
+        aboutFeature1Desc: 'Single-origin beans, expert latte art',
+        aboutFeature2: 'Local Ingredients',
+        aboutFeature2Desc: 'Seasonal produce, regional farms',
+        aboutFeature3: 'Made from Scratch',
+        aboutFeature3Desc: 'Everything baked fresh daily',
+        aboutFeature4: 'Vegan Friendly',
+        aboutFeature4Desc: 'Full plant-based menu available',
+        
+        // Menu
+        menuLabel: 'What We Serve',
+        menuTitle: 'Crafted with Love',
+        menuSubtitle: 'From golden avocado toasts to rich eggs benedict — every plate is a reason to linger a little longer.',
+        menuTab1: '🍳 Brunch',
+        menuTab2: '☕ Coffee',
+        menuTab3: '🥐 Pastries',
+        // Menu Items - Brunch
+        brunchItem1Title: 'Avocado Sourdough Toast',
+        brunchItem1Desc: 'Smashed avo, poached egg, chili flakes, microgreens on toasted sourdough',
+        brunchItem1Price: '€12.50',
+        brunchItem2Title: 'Classic Eggs Benedict',
+        brunchItem2Desc: 'English muffin, smoked salmon, poached eggs, hollandaise, chives',
+        brunchItem2Price: '€14.90',
+        brunchItem3Title: 'Fluffy Ricotta Pancakes',
+        brunchItem3Desc: 'Whipped ricotta, seasonal berries, maple syrup, lemon zest butter',
+        brunchItem3Price: '€11.50',
+        brunchItem4Title: 'Bloom Grain Bowl',
+        brunchItem4Desc: 'Quinoa, roasted vegetables, soft-boiled egg, tahini dressing, seeds',
+        brunchItem4Price: '€13.90',
+        
+        // Menu Items - Coffee
+        coffeeItem1Title: 'Signature Flat White',
+        coffeeItem1Desc: 'Double ristretto, silky microfoam milk, roasted hazelnut notes',
+        coffeeItem1Price: '€4.50',
+        coffeeItem2Title: 'Cold Brew Tonic',
+        coffeeItem2Desc: '24h cold brew, premium tonic water, orange peel, a single ice cube',
+        coffeeItem2Price: '€5.90',
+        coffeeItem3Title: 'Rose Cardamom Latte',
+        coffeeItem3Desc: 'Espresso, oat milk, house-made rose syrup, cardamom, edible rose petals',
+        coffeeItem3Price: '€5.50',
+        coffeeItem4Title: 'Ceremonial Matcha',
+        coffeeItem4Desc: 'Grade A ceremonial matcha, steamed oat milk, light honey drizzle',
+        coffeeItem4Price: '€5.20',
+        
+        // Menu Items - Pastries
+        pastryItem1Title: 'Butter Croissant',
+        pastryItem1Desc: 'Classic French laminated pastry, 72-hour dough, pure French butter',
+        pastryItem1Price: '€3.80',
+        pastryItem2Title: 'Cardamom Cinnamon Roll',
+        pastryItem2Desc: 'Soft brioche dough, cinnamon sugar swirl, cream cheese glaze',
+        pastryItem2Price: '€4.50',
+        
+        // Menu Items - Drinks
+        drinkItem1Title: 'Green Detox Smoothie',
+        drinkItem1Desc: 'Spinach, mango, banana, coconut water, lime, fresh ginger',
+        drinkItem1Price: '€7.50',
+        drinkItem2Title: 'House Lavender Lemonade',
+        drinkItem2Desc: 'Fresh-squeezed lemon, house lavender syrup, sparkling water, mint',
+        drinkItem2Price: '€5.90',
+        
+        // Gallery
+        galleryLabel: 'Our World',
+        galleryTitle: 'A Feast for the Eyes',
+        galleryLink: 'Follow us @bloomcafe →',
+        
+        // Testimonials
+        testLabel: 'Guest Love',
+        testTitle: 'What People Are Saying',
+        
+        // Reservation
+        reserveLabel: 'Book a Table',
+        reserveTitle: 'Reserve Your Morning Moment',
+        reserveSubtitle: 'Whether it\'s a lazy Sunday with family or a catch-up with friends — we\'d love to have you. Walk-ins welcome, but reservations get the best seats.',
+        reserveCallTitle: 'Call Us',
+        reserveCallText: '+49 511 000 1234 · We\'re happy to help with group bookings',
+        reserveEmailTitle: 'Email',
+        reserveEmailText: 'hello@bloomcafe.de · We reply within a few hours',
+        reserveLocationTitle: 'Find Us',
+        reserveLocationText: 'Lister Meile 12, 30161 Hannover, Germany',
+        reserveFormTitle: 'Make a Reservation',
+        reserveFormFirstName: 'First Name',
+        reserveFormLastName: 'Last Name',
+        reserveFormDate: 'Date',
+        reserveFormTime: 'Time',
+        reserveFormGuests: 'Guests',
+        reserveFormPhone: 'Phone',
+        reserveFormSpecial: 'Special Requests',
+        reserveFormSubmit: 'Confirm Reservation →',
+        reserveFormPlaceholder1: 'Emma',
+        reserveFormPlaceholder2: 'Rosenberg',
+        reserveFormPlaceholder3: '+49 511 ...',
+        reserveFormPlaceholder4: 'Dietary requirements, celebrations, seating preferences...',
+        reserveFormGuest1: '1 person',
+        reserveFormGuest2: '2 people',
+        reserveFormGuest3: '3–4 people',
+        reserveFormGuest4: '5–6 people',
+        reserveFormGuest5: '7+ people',
+        
+        // Hours
+        hoursLabel: 'When to Visit',
+        hoursTitle: 'Opening Hours',
+        hoursMonday: 'Monday',
+        hoursClosed: 'Closed',
+        hoursTuesFri: 'Tuesday – Friday',
+        hoursTuesFriTime: '08:00 – 17:00',
+        hoursSaturday: 'Saturday',
+        hoursSaturdayTime: '08:00 – 18:00',
+        hoursSunday: 'Sunday',
+        hoursSundayTime: '09:00 – 16:00',
+        hoursNote: '🎉 Extended hours during public holidays and special events. Follow us on Instagram for updates.',
+        
+        // Map
+        mapTitle: 'Bloom Café — Hannover',
+        mapText: 'Lister Meile 12, 30161 Hannover, Germany<br>5 min walk from Lister Platz · Tram Line 3 & 7',
+        mapBtn1: 'Get Directions',
+        mapBtn2: 'Street View',
+        
+        // Newsletter
+        newsletterTitle: 'Stay in the Loop 🌸',
+        newsletterSubtitle: 'New seasonal menus, events & exclusive offers — right to your inbox.',
+        newsletterPlaceholder: 'your@email.com',
+        newsletterBtn: 'Subscribe',
+        
+        // Footer
+        footerBrand: '🌸 Bloom Café',
+        footerBrandDesc: 'A warm corner of Hannover for those who believe good food and great coffee make everything better.',
+        footerExplore: 'Explore',
+        footerExploreOurStory: 'Our Story',
+        footerExploreMenu: 'Menu',
+        footerExploreGallery: 'Gallery',
+        footerExploreReviews: 'Reviews',
+        footerVisit: 'Visit',
+        footerVisitReservations: 'Reservations',
+        footerVisitHours: 'Opening Hours',
+        footerVisitFind: 'Find Us',
+        footerVisitCatering: 'Catering',
+        footerContact: 'Contact',
+        footerContactPhone: '+49 511 000 1234',
+        footerContactEmail: 'hello@bloomcafe.de',
+        footerContactPress: 'Press & Media',
+        footerContactWork: 'Work with Us',
+        footerCopyright: '© 2025 Bloom Café. Template by your studio. All rights reserved.',
+        footerPrivacy: 'Privacy Policy',
+        footerCookie: 'Cookie Policy',
+        footerImpressum: 'Impressum',
+      },
+      de: {
+        // Navigation
+        navAbout: 'Über Uns',
+        navMenu: 'Speisekarte',
+        navGallery: 'Galerie',
+        navHours: 'Besuch Uns',
+        navReserve: 'Tisch Reservieren',
+        mobileAbout: 'Über Uns',
+        mobileMenu: 'Speisekarte',
+        mobileGallery: 'Galerie',
+        mobileReserve: 'Tisch Reservieren',
+        mobileHours: 'Besuch Uns',
+        
+        // Hero
+        heroEyebrow: 'Seit 2019 · Hannover, Deutschland',
+        heroHeading: 'Jede Tasse<br>Erzählt eine <em>Geschichte</em>',
+        heroSubheading: 'Handwerklich gerösteter Kaffee, kunstvolle Frühstücks- & Brunch-Gerichte und warme Momente – mit Liebe im Herzen der Stadt gebraut.',
+        heroBtn1: 'Speisekarte Erkunden →',
+        heroBtn2: 'Tisch Reservieren',
+        heroBadge1Title: '4.9 / 5.0',
+        heroBadge1Subtitle: '720+ Google-Bewertungen',
+        heroBadge2Title: 'Bestes Brunch 2024',
+        heroBadge2Subtitle: 'City Food Awards',
+        scrollText: 'Scrollen',
+        floatBookText: 'Tisch Reservieren',
+        
+        // Stats
+        stat1Number: '720+',
+        stat1Label: 'Zufriedene Kunden',
+        stat2Number: '48',
+        stat2Label: 'Menü Artikel',
+        stat3Number: '5',
+        stat3Label: 'Jahre offen',
+        stat4Number: '100%',
+        stat4Label: 'Lokal Bezogen',
+        
+        // About
+        aboutLabel: 'Unsere Geschichte',
+        aboutTitle: 'Ein Ort zum Entspannen & Genießen',
+        aboutPara1: 'Bloom Café wurde 2019 aus einer Leidenschaft für guten Kaffee und ungehaste Morgen gegründet – mit einem einfachen Glauben: Frühstück und Brunch sollten sich wie eine Feier anfühlen, nicht wie eine Pflicht.',
+        aboutPara2: 'Jedes Gericht wird von Grund auf mit lokal bezogenen Zutaten zubereitet, und jede Tasse wird von unseren ausgebildeten Baristas mit handverlesenen Single-Origin-Bohnen zubereitet.',
+        aboutBadge: '5+<br>Jahre der<br>Leidenschaft',
+        aboutFeature1: 'Spezial Kaffee',
+        aboutFeature1Desc: 'Single-Origin-Bohnen, Expert Latte Art',
+        aboutFeature2: 'Lokale Zutaten',
+        aboutFeature2Desc: 'Saisonale Produkte, regionale Bauernhöfe',
+        aboutFeature3: 'Von Grund Auf Gefertigt',
+        aboutFeature3Desc: 'Alles täglich frisch gebacken',
+        aboutFeature4: 'Veganfreundlich',
+        aboutFeature4Desc: 'Vollständiges vegetarisches Menü',
+        
+        // Menu
+        menuLabel: 'Was Wir Servieren',
+        menuTitle: 'Mit Liebe Zubereitet',
+        menuSubtitle: 'Von goldenen Avocado-Toasts bis zu reichhaltigem Eggs Benedict – jeder Teller ist ein Grund, ein bisschen länger zu bleiben.',
+        menuTab1: '🍳 Brunch',
+        menuTab2: '☕ Kaffee',
+        menuTab3: '🥐 Gebäck',
+        menuTab4: '🥤 Kalte Getränke',
+        
+        // Menu Items - Brunch
+        brunchItem1Title: 'Avocado-Sauerteig-Toast',
+        brunchItem1Desc: 'Pürierte Avocado, pochiertes Ei, Chili-Flocken, Microgreens auf geröstetem Sauerteig',
+        brunchItem1Price: '€12,50',
+        brunchItem2Title: 'Klassisches Eggs Benedict',
+        brunchItem2Desc: 'English Muffin, geräucherter Lachs, pochierte Eier, Hollandaise, Schnittlauch',
+        brunchItem2Price: '€14,90',
+        brunchItem3Title: 'Fluffige Ricotta-Pfannkuchen',
+        brunchItem3Desc: 'Geschlagener Ricotta, saisonale Beeren, Ahornsirup, Zitronenbutter',
+        brunchItem3Price: '€11,50',
+        brunchItem4Title: 'Bloom Körner Schüssel',
+        brunchItem4Desc: 'Quinoa, geröstetes Gemüse, weiches gekochtes Ei, Tahin-Dressing, Samen',
+        brunchItem4Price: '€13,90',
+        
+        // Menu Items - Coffee
+        coffeeItem1Title: 'Signature Flat White',
+        coffeeItem1Desc: 'Doppelter Ristretto, seidenarmer Mikroschaum-Milch, geröstete Haselnuss-Noten',
+        coffeeItem1Price: '€4,50',
+        coffeeItem2Title: 'Cold Brew Tonic',
+        coffeeItem2Desc: '24h Cold Brew, Premium-Tonicwasser, Orangenschale, ein einziger Eiswürfel',
+        coffeeItem2Price: '€5,90',
+        coffeeItem3Title: 'Rose Cardamom Latte',
+        coffeeItem3Desc: 'Espresso, Hafermilch, hausgemachter Rosensirup, Kardamom, essbare Rosenblätter',
+        coffeeItem3Price: '€5,50',
+        coffeeItem4Title: 'Zeremonial Matcha',
+        coffeeItem4Desc: 'Grad A Zeremonial Matcha, gedämpfte Hafermilch, leichter Honigdrizzle',
+        coffeeItem4Price: '€5,20',
+        
+        // Menu Items - Pastries
+        pastryItem1Title: 'Butter Croissant',
+        pastryItem1Desc: 'Klassisches französisches Blättergebäck, 72 Stunden Teig, reine französische Butter',
+        pastryItem1Price: '€3,80',
+        pastryItem2Title: 'Kardamom Zimtrolle',
+        pastryItem2Desc: 'Weiches Brioche-Teig, Zimt-Zucker-Wirbel, Frischkäse-Glasur',
+        pastryItem2Price: '€4,50',
+        
+        // Menu Items - Drinks
+        drinkItem1Title: 'Grüner Detox Smoothie',
+        drinkItem1Desc: 'Spinat, Mango, Banane, Kokoswasser, Limette, frischer Ingwer',
+        drinkItem1Price: '€7,50',
+        drinkItem2Title: 'Hausgemachte Lavendel-Limonade',
+        drinkItem2Desc: 'Frisch gepresstes Zitronensaft, hausgemachter Lavendelsirup, Sprudelwasser, Minze',
+        drinkItem2Price: '€5,90',
+        
+        // Gallery
+        galleryLabel: 'Unsere Welt',
+        galleryTitle: 'Ein Fest Für Die Augen',
+        galleryLink: 'Folgen Sie uns @bloomcafe →',
+        
+        // Testimonials
+        testLabel: 'Gästelove',
+        testTitle: 'Was Leute Sagen',
+        
+        // Reservation
+        reserveLabel: 'Tisch Reservieren',
+        reserveTitle: 'Reservieren Sie Ihren Morgen Moment',
+        reserveSubtitle: 'Egal ob Sonntag mit der Familie oder Treffen mit Freunden – wir freuen uns auf Sie. Ohne Reservierung gerne willkommen, aber Reservierungen bekommen die besten Plätze.',
+        reserveCallTitle: 'Rufen Sie Uns An',
+        reserveCallText: '+49 511 000 1234 · Wir helfen gerne bei Gruppenreservierungen',
+        reserveEmailTitle: 'E-Mail',
+        reserveEmailText: 'hello@bloomcafe.de · Wir antworten innerhalb weniger Stunden',
+        reserveLocationTitle: 'Finden Sie Uns',
+        reserveLocationText: 'Lister Meile 12, 30161 Hannover, Deutschland',
+        reserveFormTitle: 'Reservierung Machen',
+        reserveFormFirstName: 'Vorname',
+        reserveFormLastName: 'Nachname',
+        reserveFormDate: 'Datum',
+        reserveFormTime: 'Zeit',
+        reserveFormGuests: 'Gäste',
+        reserveFormPhone: 'Telefon',
+        reserveFormSpecial: 'Besondere Anfragen',
+        reserveFormSubmit: 'Reservierung Bestätigen →',
+        reserveFormPlaceholder1: 'Emma',
+        reserveFormPlaceholder2: 'Rosenberg',
+        reserveFormPlaceholder3: '+49 511 ...',
+        reserveFormPlaceholder4: 'Dietarische Einschränkungen, Feiern, Sitzplatzwünsche...',
+        reserveFormGuest1: '1 Person',
+        reserveFormGuest2: '2 Personen',
+        reserveFormGuest3: '3–4 Personen',
+        reserveFormGuest4: '5–6 Personen',
+        reserveFormGuest5: '7+ Personen',
+        
+        // Hours
+        hoursLabel: 'Wann Sie Uns Besuchen',
+        hoursTitle: 'Öffnungszeiten',
+        hoursMonday: 'Montag',
+        hoursClosed: 'Geschlossen',
+        hoursTuesFri: 'Dienstag – Freitag',
+        hoursTuesFriTime: '08:00 – 17:00',
+        hoursSaturday: 'Samstag',
+        hoursSaturdayTime: '08:00 – 18:00',
+        hoursSunday: 'Sonntag',
+        hoursSundayTime: '09:00 – 16:00',
+        hoursNote: '🎉 Längere Öffnungszeiten während Feiertagen und besonderen Veranstaltungen. Folgen Sie uns auf Instagram für Updates.',
+        
+        // Map
+        mapTitle: 'Bloom Café — Hannover',
+        mapText: 'Lister Meile 12, 30161 Hannover, Deutschland<br>5 min zu Fuß vom Lister Platz · Straßenbahn Linie 3 & 7',
+        mapBtn1: 'Route',
+        mapBtn2: 'Straßenansicht',
+        
+        // Newsletter
+        newsletterTitle: 'Bleiben Sie auf Dem Laufenden 🌸',
+        newsletterSubtitle: 'Neue saisonale Menüs, Veranstaltungen und exklusive Angebote – direkt in Ihren Posteingang.',
+        newsletterPlaceholder: 'ihre@email.de',
+        newsletterBtn: 'Abonnieren',
+        
+        // Footer
+        footerBrand: '🌸 Bloom Café',
+        footerBrandDesc: 'Eine warme Ecke Hannover für diejenigen, die glauben, dass gutes Essen und großartiger Kaffee alles besser macht.',
+        footerExplore: 'Erkunden',
+        footerExploreOurStory: 'Unsere Geschichte',
+        footerExploreMenu: 'Speisekarte',
+        footerExploreGallery: 'Galerie',
+        footerExploreReviews: 'Bewertungen',
+        footerVisit: 'Besuch',
+        footerVisitReservations: 'Reservierungen',
+        footerVisitHours: 'Öffnungszeiten',
+        footerVisitFind: 'Finden Sie Uns',
+        footerVisitCatering: 'Catering',
+        footerContact: 'Kontakt',
+        footerContactPhone: '+49 511 000 1234',
+        footerContactEmail: 'hello@bloomcafe.de',
+        footerContactPress: 'Presse & Medien',
+        footerContactWork: 'Mit Uns Arbeiten',
+        footerCopyright: '© 2025 Bloom Café. Template von your studio. Alle Rechte vorbehalten.',
+        footerPrivacy: 'Datenschutzerklärung',
+        footerCookie: 'Cookie-Richtlinie',
+        footerImpressum: 'Impressum',
+      }
+    };
+
+    // ---- LANGUAGE SWITCHER ----
+    let currentLanguage = localStorage.getItem('bloomLanguage') || 'de';
+
+    function updateLanguage(lang) {
+      currentLanguage = lang;
+      localStorage.setItem('bloomLanguage', lang);
+      const t = translations[lang];
+
+      // Update document language
+      document.documentElement.lang = lang;
+
+      // Update all navigation
+      document.querySelectorAll('[href="#about"]').forEach(el => {
+        if (el.classList.contains('nav-links')) return;
+        el.textContent = t.navAbout;
+      });
+      const navElements = document.querySelectorAll('.nav-links a');
+      if (navElements[0]) navElements[0].textContent = t.navAbout;
+      if (navElements[1]) navElements[1].textContent = t.navMenu;
+      if (navElements[2]) navElements[2].textContent = t.navGallery;
+      if (navElements[3]) navElements[3].textContent = t.navHours;
+      if (navElements[4]) {
+        navElements[4].textContent = t.navReserve;
+      }
+
+      // Update mobile menu
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (mobileMenu) {
+        const mobileLinks = mobileMenu.querySelectorAll('a:not(.mobile-menu-close)');
+        if (mobileLinks[0]) mobileLinks[0].textContent = t.mobileAbout;
+        if (mobileLinks[1]) mobileLinks[1].textContent = t.mobileMenu;
+        if (mobileLinks[2]) mobileLinks[2].textContent = t.mobileGallery;
+        if (mobileLinks[3]) mobileLinks[3].textContent = t.mobileReserve;
+        if (mobileLinks[4]) mobileLinks[4].textContent = t.mobileHours;
+      }
+
+      // Hero section
+      document.querySelector('.hero-eyebrow').textContent = t.heroEyebrow;
+      document.querySelector('.hero h1').innerHTML = t.heroHeading;
+      document.querySelector('.hero p').textContent = t.heroSubheading;
+      const heroBtns = document.querySelectorAll('.hero-actions a');
+      if (heroBtns[0]) heroBtns[0].textContent = t.heroBtn1;
+      if (heroBtns[1]) heroBtns[1].textContent = t.heroBtn2;
+      
+      // Hero badges
+      const heroBadges = document.querySelectorAll('.hero-badge');
+      if (heroBadges[0]) {
+        heroBadges[0].querySelector('strong').textContent = t.heroBadge1Title;
+        heroBadges[0].querySelector('span').textContent = t.heroBadge1Subtitle;
+      }
+      if (heroBadges[1]) {
+        heroBadges[1].querySelector('strong').textContent = t.heroBadge2Title;
+        heroBadges[1].querySelector('span').textContent = t.heroBadge2Subtitle;
+      }
+
+      // Scroll text
+      document.querySelector('.hero-scroll').textContent = t.scrollText;
+
+      // Float book button
+      const floatBookText = document.getElementById('floatBookText');
+      if (floatBookText) floatBookText.textContent = t.floatBookText;
+
+      // Stats
+      const statItems = document.querySelectorAll('.stat-item');
+      if (statItems[0]) {
+        statItems[0].querySelector('.stat-number').textContent = t.stat1Number;
+        statItems[0].querySelector('.stat-label').textContent = t.stat1Label;
+      }
+      if (statItems[1]) {
+        statItems[1].querySelector('.stat-number').textContent = t.stat2Number;
+        statItems[1].querySelector('.stat-label').textContent = t.stat2Label;
+      }
+      if (statItems[2]) {
+        statItems[2].querySelector('.stat-number').textContent = t.stat3Number;
+        statItems[2].querySelector('.stat-label').textContent = t.stat3Label;
+      }
+      if (statItems[3]) {
+        statItems[3].querySelector('.stat-number').textContent = t.stat4Number;
+        statItems[3].querySelector('.stat-label').textContent = t.stat4Label;
+      }
+
+      // About
+      document.querySelector('.about-content .section-label').textContent = t.aboutLabel;
+      document.querySelector('.about-content .section-title').textContent = t.aboutTitle;
+      const aboutParas = document.querySelectorAll('.about-content .section-sub');
+      if (aboutParas[0]) aboutParas[0].textContent = t.aboutPara1;
+      if (aboutParas[1]) aboutParas[1].textContent = t.aboutPara2;
+      document.querySelector('.about-badge').innerHTML = t.aboutBadge.replace(/\n/g, '');
+
+      const aboutFeatures = document.querySelectorAll('.about-feature');
+      if (aboutFeatures[0]) {
+        aboutFeatures[0].querySelector('h4').textContent = t.aboutFeature1;
+        aboutFeatures[0].querySelector('p').textContent = t.aboutFeature1Desc;
+      }
+      if (aboutFeatures[1]) {
+        aboutFeatures[1].querySelector('h4').textContent = t.aboutFeature2;
+        aboutFeatures[1].querySelector('p').textContent = t.aboutFeature2Desc;
+      }
+      if (aboutFeatures[2]) {
+        aboutFeatures[2].querySelector('h4').textContent = t.aboutFeature3;
+        aboutFeatures[2].querySelector('p').textContent = t.aboutFeature3Desc;
+      }
+      if (aboutFeatures[3]) {
+        aboutFeatures[3].querySelector('h4').textContent = t.aboutFeature4;
+        aboutFeatures[3].querySelector('p').textContent = t.aboutFeature4Desc;
+      }
+
+      // Menu
+      const menuHeader = document.querySelector('.menu-header');
+      if (menuHeader) {
+        menuHeader.querySelector('.section-label').textContent = t.menuLabel;
+        menuHeader.querySelector('.section-title').textContent = t.menuTitle;
+        menuHeader.querySelector('.section-sub').textContent = t.menuSubtitle;
+      }
+
+      const menuTabs = document.querySelectorAll('.menu-tab');
+      if (menuTabs[0]) menuTabs[0].textContent = t.menuTab1;
+      if (menuTabs[1]) menuTabs[1].textContent = t.menuTab2;
+      if (menuTabs[2]) menuTabs[2].textContent = t.menuTab3;
+      if (menuTabs[3]) menuTabs[3].textContent = t.menuTab4;
+
+      // Menu Items - Brunch Panel
+      const brunchPanel = document.getElementById('tab-brunch');
+      if (brunchPanel) {
+        const brunchItems = brunchPanel.querySelectorAll('.menu-item');
+        if (brunchItems[0]) {
+          brunchItems[0].querySelector('h4').textContent = t.brunchItem1Title;
+          brunchItems[0].querySelector('p').textContent = t.brunchItem1Desc;
+          brunchItems[0].querySelector('.menu-price').textContent = t.brunchItem1Price;
+        }
+        if (brunchItems[1]) {
+          brunchItems[1].querySelector('h4').textContent = t.brunchItem2Title;
+          brunchItems[1].querySelector('p').textContent = t.brunchItem2Desc;
+          brunchItems[1].querySelector('.menu-price').textContent = t.brunchItem2Price;
+        }
+        if (brunchItems[2]) {
+          brunchItems[2].querySelector('h4').textContent = t.brunchItem3Title;
+          brunchItems[2].querySelector('p').textContent = t.brunchItem3Desc;
+          brunchItems[2].querySelector('.menu-price').textContent = t.brunchItem3Price;
+        }
+        if (brunchItems[3]) {
+          brunchItems[3].querySelector('h4').textContent = t.brunchItem4Title;
+          brunchItems[3].querySelector('p').textContent = t.brunchItem4Desc;
+          brunchItems[3].querySelector('.menu-price').textContent = t.brunchItem4Price;
+        }
+      }
+
+      // Menu Items - Coffee Panel
+      const coffeePanel = document.getElementById('tab-coffee');
+      if (coffeePanel) {
+        const coffeeItems = coffeePanel.querySelectorAll('.menu-item');
+        if (coffeeItems[0]) {
+          coffeeItems[0].querySelector('h4').textContent = t.coffeeItem1Title;
+          coffeeItems[0].querySelector('p').textContent = t.coffeeItem1Desc;
+          coffeeItems[0].querySelector('.menu-price').textContent = t.coffeeItem1Price;
+        }
+        if (coffeeItems[1]) {
+          coffeeItems[1].querySelector('h4').textContent = t.coffeeItem2Title;
+          coffeeItems[1].querySelector('p').textContent = t.coffeeItem2Desc;
+          coffeeItems[1].querySelector('.menu-price').textContent = t.coffeeItem2Price;
+        }
+        if (coffeeItems[2]) {
+          coffeeItems[2].querySelector('h4').textContent = t.coffeeItem3Title;
+          coffeeItems[2].querySelector('p').textContent = t.coffeeItem3Desc;
+          coffeeItems[2].querySelector('.menu-price').textContent = t.coffeeItem3Price;
+        }
+        if (coffeeItems[3]) {
+          coffeeItems[3].querySelector('h4').textContent = t.coffeeItem4Title;
+          coffeeItems[3].querySelector('p').textContent = t.coffeeItem4Desc;
+          coffeeItems[3].querySelector('.menu-price').textContent = t.coffeeItem4Price;
+        }
+      }
+
+      // Menu Items - Pastries Panel
+      const pastriesPanel = document.getElementById('tab-pastries');
+      if (pastriesPanel) {
+        const pastriesItems = pastriesPanel.querySelectorAll('.menu-item');
+        if (pastriesItems[0]) {
+          pastriesItems[0].querySelector('h4').textContent = t.pastryItem1Title;
+          pastriesItems[0].querySelector('p').textContent = t.pastryItem1Desc;
+          pastriesItems[0].querySelector('.menu-price').textContent = t.pastryItem1Price;
+        }
+        if (pastriesItems[1]) {
+          pastriesItems[1].querySelector('h4').textContent = t.pastryItem2Title;
+          pastriesItems[1].querySelector('p').textContent = t.pastryItem2Desc;
+          pastriesItems[1].querySelector('.menu-price').textContent = t.pastryItem2Price;
+        }
+      }
+
+      // Menu Items - Drinks Panel
+      const drinksPanel = document.getElementById('tab-drinks');
+      if (drinksPanel) {
+        const drinkItems = drinksPanel.querySelectorAll('.menu-item');
+        if (drinkItems[0]) {
+          drinkItems[0].querySelector('h4').textContent = t.drinkItem1Title;
+          drinkItems[0].querySelector('p').textContent = t.drinkItem1Desc;
+          drinkItems[0].querySelector('.menu-price').textContent = t.drinkItem1Price;
+        }
+        if (drinkItems[1]) {
+          drinkItems[1].querySelector('h4').textContent = t.drinkItem2Title;
+          drinkItems[1].querySelector('p').textContent = t.drinkItem2Desc;
+          drinkItems[1].querySelector('.menu-price').textContent = t.drinkItem2Price;
+        }
+      }
+
+      // Gallery
+      const galleryHeader = document.querySelector('.gallery-header');
+      if (galleryHeader) {
+        galleryHeader.querySelector('.section-label').textContent = t.galleryLabel;
+        galleryHeader.querySelector('.section-title').textContent = t.galleryTitle;
+        galleryHeader.querySelector('.gallery-link').textContent = t.galleryLink;
+      }
+
+      // Testimonials
+      const testHeader = document.querySelector('.testimonials-header');
+      if (testHeader) {
+        testHeader.querySelector('.section-label').textContent = t.testLabel;
+        testHeader.querySelector('.section-title').textContent = t.testTitle;
+      }
+
+      // Reservation
+      const reserveContent = document.querySelector('.reservation-content');
+      if (reserveContent) {
+        reserveContent.querySelector('.section-label').textContent = t.reserveLabel;
+        reserveContent.querySelector('.section-title').textContent = t.reserveTitle;
+        reserveContent.querySelector('.section-sub').textContent = t.reserveSubtitle;
+
+        const infoRows = reserveContent.querySelectorAll('.info-row');
+        if (infoRows[0]) {
+          infoRows[0].querySelector('h5').textContent = t.reserveCallTitle;
+          infoRows[0].querySelector('p').textContent = t.reserveCallText;
+        }
+        if (infoRows[1]) {
+          infoRows[1].querySelector('h5').textContent = t.reserveEmailTitle;
+          infoRows[1].querySelector('p').textContent = t.reserveEmailText;
+        }
+        if (infoRows[2]) {
+          infoRows[2].querySelector('h5').textContent = t.reserveLocationTitle;
+          infoRows[2].querySelector('p').textContent = t.reserveLocationText;
+        }
+      }
+
+      // Reservation form
+      const reserveForm = document.querySelector('.reservation-form');
+      if (reserveForm) {
+        reserveForm.querySelector('h3').textContent = t.reserveFormTitle;
+        
+        const formGroups = reserveForm.querySelectorAll('.form-group');
+        let formIndex = 0;
+        if (formGroups[formIndex]) {
+          formGroups[formIndex].querySelector('label').textContent = t.reserveFormFirstName;
+          formGroups[formIndex].querySelector('input').placeholder = t.reserveFormPlaceholder1;
+        }
+        formIndex++;
+        if (formGroups[formIndex]) {
+          formGroups[formIndex].querySelector('label').textContent = t.reserveFormLastName;
+          formGroups[formIndex].querySelector('input').placeholder = t.reserveFormPlaceholder2;
+        }
+        formIndex++;
+        if (formGroups[formIndex]) {
+          formGroups[formIndex].querySelector('label').textContent = t.reserveFormDate;
+        }
+        formIndex++;
+        if (formGroups[formIndex]) {
+          formGroups[formIndex].querySelector('label').textContent = t.reserveFormTime;
+        }
+        formIndex++;
+        if (formGroups[formIndex]) {
+          formGroups[formIndex].querySelector('label').textContent = t.reserveFormGuests;
+          const selectOptions = formGroups[formIndex].querySelector('select');
+          selectOptions.options[0].textContent = t.reserveFormGuest1;
+          selectOptions.options[1].textContent = t.reserveFormGuest2;
+          selectOptions.options[2].textContent = t.reserveFormGuest3;
+          selectOptions.options[3].textContent = t.reserveFormGuest4;
+          selectOptions.options[4].textContent = t.reserveFormGuest5;
+        }
+        formIndex++;
+        if (formGroups[formIndex]) {
+          formGroups[formIndex].querySelector('label').textContent = t.reserveFormPhone;
+          formGroups[formIndex].querySelector('input').placeholder = t.reserveFormPlaceholder3;
+        }
+        formIndex++;
+        if (formGroups[formIndex]) {
+          formGroups[formIndex].querySelector('label').textContent = t.reserveFormSpecial;
+          formGroups[formIndex].querySelector('textarea').placeholder = t.reserveFormPlaceholder4;
+        }
+
+        reserveForm.querySelector('.form-submit').textContent = t.reserveFormSubmit;
+      }
+
+      // Hours
+      const hoursCard = document.querySelector('.hours-card');
+      if (hoursCard) {
+        hoursCard.querySelector('.section-label').textContent = t.hoursLabel;
+        hoursCard.querySelector('h2').textContent = t.hoursTitle;
+
+        const hoursRows = hoursCard.querySelectorAll('.hours-row');
+        if (hoursRows[0]) {
+          hoursRows[0].querySelector('.day').textContent = t.hoursMonday;
+          hoursRows[0].querySelector('.time').textContent = t.hoursClosed;
+        }
+        if (hoursRows[1]) {
+          hoursRows[1].querySelector('.day').textContent = t.hoursTuesFri;
+          hoursRows[1].querySelector('.time').textContent = t.hoursTuesFriTime;
+        }
+        if (hoursRows[2]) {
+          hoursRows[2].querySelector('.day').textContent = t.hoursSaturday;
+          hoursRows[2].querySelector('.time').textContent = t.hoursSaturdayTime;
+        }
+        if (hoursRows[3]) {
+          hoursRows[3].querySelector('.day').textContent = t.hoursSunday;
+          hoursRows[3].querySelector('.time').textContent = t.hoursSundayTime;
+        }
+
+        hoursCard.querySelector('.hours-note').textContent = t.hoursNote;
+      }
+
+      // Map
+      const mapCard = document.querySelector('.map-card');
+      if (mapCard) {
+        mapCard.querySelector('.map-info h4').textContent = t.mapTitle;
+        mapCard.querySelector('.map-info p').innerHTML = t.mapText;
+        const mapBtns = mapCard.querySelectorAll('.map-btn');
+        if (mapBtns[0]) mapBtns[0].textContent = t.mapBtn1;
+        if (mapBtns[1]) mapBtns[1].textContent = t.mapBtn2;
+      }
+
+      // Newsletter
+      const newsletter = document.querySelector('.newsletter');
+      if (newsletter) {
+        newsletter.querySelector('h2').textContent = t.newsletterTitle;
+        newsletter.querySelector('p').textContent = t.newsletterSubtitle;
+        newsletter.querySelector('input').placeholder = t.newsletterPlaceholder;
+        newsletter.querySelector('button').textContent = t.newsletterBtn;
+      }
+
+      // Footer
+      const footer = document.querySelector('.footer');
+      if (footer) {
+        footer.querySelector('.footer-brand h3').textContent = t.footerBrand;
+        footer.querySelector('.footer-brand p').textContent = t.footerBrandDesc;
+
+        const footerCols = document.querySelectorAll('.footer-col');
+        if (footerCols[0]) {
+          footerCols[0].querySelector('h4').textContent = t.footerExplore;
+          const items = footerCols[0].querySelectorAll('li a');
+          if (items[0]) items[0].textContent = t.footerExploreOurStory;
+          if (items[1]) items[1].textContent = t.footerExploreMenu;
+          if (items[2]) items[2].textContent = t.footerExploreGallery;
+          if (items[3]) items[3].textContent = t.footerExploreReviews;
+        }
+        if (footerCols[1]) {
+          footerCols[1].querySelector('h4').textContent = t.footerVisit;
+          const items = footerCols[1].querySelectorAll('li a');
+          if (items[0]) items[0].textContent = t.footerVisitReservations;
+          if (items[1]) items[1].textContent = t.footerVisitHours;
+          if (items[2]) items[2].textContent = t.footerVisitFind;
+          if (items[3]) items[3].textContent = t.footerVisitCatering;
+        }
+        if (footerCols[2]) {
+          footerCols[2].querySelector('h4').textContent = t.footerContact;
+          const items = footerCols[2].querySelectorAll('li a');
+          if (items[0]) items[0].textContent = t.footerContactPhone;
+          if (items[1]) items[1].textContent = t.footerContactEmail;
+          if (items[2]) items[2].textContent = t.footerContactPress;
+          if (items[3]) items[3].textContent = t.footerContactWork;
+        }
+
+        const footerBottom = document.querySelector('.footer-bottom');
+        if (footerBottom) {
+          footerBottom.querySelector('p').textContent = t.footerCopyright;
+          const links = footerBottom.querySelectorAll('a');
+          if (links[0]) links[0].textContent = t.footerPrivacy;
+          if (links[1]) links[1].textContent = t.footerCookie;
+          if (links[2]) links[2].textContent = t.footerImpressum;
+        }
+      }
+
+      // Update active state on pill buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+    }
+
+    // Initialize language on page load
+    window.addEventListener('load', () => {
+      updateLanguage(currentLanguage);
+    });
+
+    // Language pill button listeners
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => updateLanguage(btn.dataset.lang));
+    });
+
+    // ---- Loading screen ----
+    const loader = document.getElementById('loader');
+    window.addEventListener('load', () => {
+      setTimeout(() => loader.classList.add('hidden'), 800);
+    });
+
+    // ---- Navbar scroll effect ----
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ---- Hero parallax ----
+    const heroBg = document.getElementById('heroBg');
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY;
+      if (heroBg && offset < window.innerHeight) {
+        heroBg.style.transform = `scale(1.05) translateY(${offset * 0.25}px)`;
+      }
+    });
+
+    // ---- Mobile menu ----
+    const navToggle  = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuClose  = document.getElementById('menuClose');
+
+    navToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+    menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+
+    function closeMobile() { mobileMenu.classList.remove('open'); }
+
+    // ---- Menu tabs ----
+    document.querySelectorAll('.menu-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ---- Scroll reveal ----
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // ---- Hero image zoom on load ----
+    window.addEventListener('load', () => {
+      const heroBgEl = document.querySelector('.hero-bg');
+      if (heroBgEl) heroBgEl.style.transform = 'scale(1)';
+    });
+
+    // ---- Dark mode toggle ----
+    const darkToggle = document.getElementById('darkToggle');
+    const savedTheme = localStorage.getItem('bloomTheme');
+    if (savedTheme === 'dark') document.body.classList.add('dark-mode');
+
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('bloomTheme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+
+    // ---- Floating Book Now button: hide when reservation section visible ----
+    const floatBook    = document.getElementById('floatBook');
+    const reserveSection = document.getElementById('reservation');
+
+    const floatObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        floatBook.classList.toggle('hide', entry.isIntersecting);
+      });
+    }, { threshold: 0.3 });
+
+    if (reserveSection) floatObserver.observe(reserveSection);
+  </script>
+
+</body>
+</html>
