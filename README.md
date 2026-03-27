@@ -1,6 +1,6 @@
-# 🍽️ Restaurant Website Templates — Bundle of 3
+# 🍽️ Restaurant Website Templates - Bundle of 3
 
-3 professional, single-file HTML restaurant website templates built for the German market. No frameworks, no dependencies — just open and edit.
+3 professional, single-file HTML restaurant website templates built for the German market. No frameworks, no dependencies - just open and edit.
 
 ---
 
