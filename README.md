@@ -1,6 +1,6 @@
 # 🍽️ Restaurant-Website-Vorlagen - Bundle of 3
 
-3 professionelle, einzelne HTML-Restaurant-Website-Vorlagen für den deutschen Markt entwickelt. Keine Frameworks, keine Abhängigkeiten — einfach öffnen und bearbeiten.
+3 professionelle, einzelne HTML-Restaurant-Website-Vorlagen für den deutschen Markt entwickelt. Keine Frameworks, keine Abhängigkeiten - einfach öffnen und bearbeiten.
 
 ---
 
@@ -41,7 +41,7 @@ Die vollständigen, sauberen Versionen sind auf Gumroad erhältlich.
 - 📸 Fotogalerie
 - 📝 Reservierungs- / Kontaktformular
 - 💌 Newsletter-Anmeldung
-- Einzelne HTML-Datei — null Setup
+- Einzelne HTML-Datei - null Setup
 
 ---
 
