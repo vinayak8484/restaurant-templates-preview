@@ -40,10 +40,9 @@ Die vollständigen, sauberen Versionen sind auf Gumroad erhältlich.
 
 ## Live-Vorschau
 
-- 🌸 [Bloom Café](vinayak8484.github.io/restaurant-templates-preview/bloom-cafe-PREVIEW.html)
-- 🖤 [Aurum Fine Dining](vinayak8484.github.io/restaurant-templates-preview/aurum-fine-dining-PREVIEW.html)
-- 🍔 [SMASH Fast Casual](vinayak8484.github.io/restaurant-templates-preview/smash-burger-PREVIEW.html)
-
+- 🌸 [Bloom Café](https://vinayak8484.github.io/restaurant-templates-preview/bloom-cafe-PREVIEW.html)
+- 🖤 [Aurum Fine Dining](https://vinayak8484.github.io/restaurant-templates-preview/aurum-fine-dining-PREVIEW.html)
+- 🍔 [SMASH Fast Casual](https://vinayak8484.github.io/restaurant-templates-preview/smash-burger-PREVIEW.html)
 ---
 
 ## Gebaut mit
