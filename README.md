@@ -40,9 +40,9 @@ The full, clean versions are available for purchase on Gumroad.
 
 ## Live Previews
 
-- 🌸 [Bloom Café](./bloom-cafe.html)
-- 🖤 [Aurum Fine Dining](./aurum-fine-dining.html)
-- 🍔 [SMASH Fast Casual](./smash-burger.html)
+- 🌸 [Bloom Café](vinayak8484.github.io/restaurant-templates-preview/bloom-cafe-PREVIEW.html)
+- 🖤 [Aurum Fine Dining](vinayak8484.github.io/restaurant-templates-preview/aurum-fine-dining-PREVIEW.html)
+- 🍔 [SMASH Fast Casual](vinayak8484.github.io/restaurant-templates-preview/smash-burger-PREVIEW.html)
 
 ---
 
